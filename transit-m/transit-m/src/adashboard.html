@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <title>OneUI - Bootstrap 5 Admin Template &amp; UI Framework</title>
+
+    <meta name="description" content="OneUI - Bootstrap 5 Admin Template &amp; UI Framework created by pixelcave">
+    <meta name="author" content="pixelcave">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph Meta -->
+    <meta property="og:title" content="OneUI - Bootstrap 5 Admin Template &amp; UI Framework">
+    <meta property="og:site_name" content="OneUI">
+    <meta property="og:description" content="OneUI - Bootstrap 5 Admin Template &amp; UI Framework created by pixelcave">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+
+    <!-- Icons -->
+    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+    <link rel="shortcut icon" href="assets/media/favicons/favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/media/favicons/favicon-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/media/favicons/apple-touch-icon-180x180.png">
+    
+    <!-- END Icons -->
+
+    <!-- Stylesheets -->
+    <!-- OneUI framework -->
+    <link rel="stylesheet" id="css-main" href="assets/css/oneui.min.css">
+
+    <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+    <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/amethyst.min.css"> -->
+    <!-- END Stylesheets -->
+  </head>
+
+  <body>
+    <!-- Page Container -->
+    <!--
+      Available classes for #page-container:
+
+      GENERIC
+
+        'remember-theme'                            Remembers active color theme and dark mode between pages using localStorage when set through
+                                                    - Theme helper buttons [data-toggle="theme"],
+                                                    - Layout helper buttons [data-toggle="layout" data-action="dark_mode_[on/off/toggle]"]
+                                                    - ..and/or One.layout('dark_mode_[on/off/toggle]')
+
+      SIDEBAR & SIDE OVERLAY
+
+        'sidebar-r'                                 Right Sidebar and left Side Overlay (default is left Sidebar and right Side Overlay)
+        'sidebar-mini'                              Mini hoverable Sidebar (screen width > 991px)
+        'sidebar-o'                                 Visible Sidebar by default (screen width > 991px)
+        'sidebar-o-xs'                              Visible Sidebar by default (screen width < 992px)
+        'sidebar-dark'                              Dark themed sidebar
+
+        'side-overlay-hover'                        Hoverable Side Overlay (screen width > 991px)
+        'side-overlay-o'                            Visible Side Overlay by default
+
+        'enable-page-overlay'                       Enables a visible clickable Page Overlay (closes Side Overlay on click) when Side Overlay opens
+
+        'side-scroll'                               Enables custom scrolling on Sidebar and Side Overlay instead of native scrolling (screen width > 991px)
+
+      HEADER
+
+        ''                                          Static Header if no class is added
+        'page-header-fixed'                         Fixed Header
+
+      HEADER STYLE
+
+        ''                                          Light themed Header
+        'page-header-dark'                          Dark themed Header
+
+      MAIN CONTENT LAYOUT
+
+        ''                                          Full width Main Content if no class is added
+        'main-content-boxed'                        Full width Main Content with a specific maximum width (screen width > 1200px)
+        'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
+
+      DARK MODE
+
+        'sidebar-dark page-header-dark dark-mode'   Enable dark mode (light sidebar/header is not supported with dark mode)
+    -->
+    <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
+      <!-- Side Overlay-->
+      <aside id="side-overlay">
+        <!-- Side Header -->
+        <div class="content-header border-bottom">
+          <!-- User Avatar -->
+          <a class="img-link me-1" href="javascript:void(0)">
+            <img class="img-avatar img-avatar32" src="assets/media/avatars/avatar10.jpg" alt="">
+          </a>
+          <!-- END User Avatar -->
+
+          
+
+          
+
+        <!-- Side Content -->
+        <div class="content-side">
+          <!-- Side Overlay Tabs -->
+          <div class="block block-transparent pull-x pull-t">
+            <ul class="nav nav-tabs nav-tabs-block nav-justified" role="tablist">
+              
+            </ul>
+            <div class="block-content tab-content overflow-hidden">
+              <!-- Overview Tab -->
+              <div class="tab-pane pull-x fade fade-left show active" id="so-overview" role="tabpanel" aria-labelledby="so-overview-tab" tabindex="0">
+                <!-- Activity -->
+                <div class="block block-transparent">
+                  <div class="block-header block-header-default">
+                    
+                  </div>
+                  <div class="block-content">
+                    <!-- Activity List -->
+                    
+                    <!-- END Activity List -->
+                  </div>
+                </div>
+                <!-- END Activity -->
+
+                <!-- Online Friends -->
+                <div class="block block-transparent">
+                  <div class="block-header block-header-default">
+                   
+                  </div>
+                  <div class="block-content">
+                    
+                  </div>
+                </div>
+                <!-- END Online Friends -->
+
+                <!-- Quick Settings -->
+                <div class="block block-transparent mb-0">
+                  <div class="block-header block-header-default">
+                   
+                  </div>
+                  <div class="block-content">
+                    
+                  </div>
+                </div>
+                <!-- END Quick Settings -->
+              </div>
+              <!-- END Overview Tab -->
+
+              <!-- Sales Tab -->
+             
+                  <!-- END Stats -->
+
+                  <!-- Today -->
+                  <div class="block-content block-content-full block-content-sm bg-body-light">
+                    <div class="row">
+                      <div class="col-6">
+                        
+                  </div>
+                  <!-- END Today -->
+
+                  <!-- Yesterday -->
+                  <div class="block-content block-content-full block-content-sm bg-body-light">
+                    
+                    <!-- END More -->
+                  </div>
+                  <!-- END Yesterday -->
+                </div>
+              </div>
+              <!-- END Sales Tab -->
+            </div>
+          </div>
+          <!-- END Side Overlay Tabs -->
+        </div>
+        <!-- END Side Content -->
+      </aside>
+      <!-- END Side Overlay -->
+
+      <!-- Sidebar -->
+      <!--
+          Sidebar Mini Mode - Display Helper classes
+
+          Adding 'smini-hide' class to an element will make it invisible (opacity: 0) when the sidebar is in mini mode
+          Adding 'smini-show' class to an element will make it visible (opacity: 1) when the sidebar is in mini mode
+              If you would like to disable the transition animation, make sure to also add the 'no-transition' class to your element
+
+          Adding 'smini-hidden' to an element will hide it when the sidebar is in mini mode
+          Adding 'smini-visible' to an element will show it (display: inline-block) only when the sidebar is in mini mode
+          Adding 'smini-visible-block' to an element will show it (display: block) only when the sidebar is in mini mode
+      -->
+      <nav id="sidebar" aria-label="Main Navigation">
+        <!-- Side Header -->
+        <div class="content-header">
+          <!-- Logo -->
+          <a class="fw-semibold text-dual" href="index.html">
+            <span class="smini-visible">
+              <i class="fa fa-circle-notch text-primary"></i>
+            </span>
+            <span class="smini-hide fs-5 tracking-wider">Transit Master</span>
+          </a>
+          <!-- END Logo -->
+
+          <!-- Extra -->
+          <div>
+            <!-- Dark Mode -->
+            <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+            <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="layout" data-action="dark_mode_toggle">
+              <i class="far fa-moon"></i>
+            </button>
+            <!-- END Dark Mode -->
+
+            <!-- Options -->
+            <div class="dropdown d-inline-block ms-1">
+              <button type="button" class="btn btn-sm btn-alt-secondary" id="sidebar-themes-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-brush"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end fs-sm smini-hide border-0" aria-labelledby="sidebar-themes-dropdown">
+                <!-- Color Themes -->
+                <!-- Layout API, functionality initialized in Template._uiHandleTheme() -->
+                <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="default" href="#">
+                  <span>Default</span>
+                  <i class="fa fa-circle text-default"></i>
+                </a>
+                <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="assets/css/themes/amethyst.min.css" href="#">
+                  <span>Amethyst</span>
+                  <i class="fa fa-circle text-amethyst"></i>
+                </a>
+                <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="assets/css/themes/city.min.css" href="#">
+                  <span>City</span>
+                  <i class="fa fa-circle text-city"></i>
+                </a>
+                <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="assets/css/themes/flat.min.css" href="#">
+                  <span>Flat</span>
+                  <i class="fa fa-circle text-flat"></i>
+                </a>
+                <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="assets/css/themes/modern.min.css" href="#">
+                  <span>Modern</span>
+                  <i class="fa fa-circle text-modern"></i>
+                </a>
+                <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="assets/css/themes/smooth.min.css" href="#">
+                  <span>Smooth</span>
+                  <i class="fa fa-circle text-smooth"></i>
+                </a>
+                <!-- END Color Themes -->
+
+                <div class="dropdown-divider"></div>
+
+                <!-- Sidebar Styles -->
+                <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                <a class="dropdown-item fw-medium" data-toggle="layout" data-action="sidebar_style_light" href="javascript:void(0)">
+                  <span>Sidebar Light</span>
+                </a>
+                <a class="dropdown-item fw-medium" data-toggle="layout" data-action="sidebar_style_dark" href="javascript:void(0)">
+                  <span>Sidebar Dark</span>
+                </a>
+                <!-- END Sidebar Styles -->
+
+                <div class="dropdown-divider"></div>
+
+                <!-- Header Styles -->
+                <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                <a class="dropdown-item fw-medium" data-toggle="layout" data-action="header_style_light" href="javascript:void(0)">
+                  <span>Header Light</span>
+                </a>
+                <a class="dropdown-item fw-medium" data-toggle="layout" data-action="header_style_dark" href="javascript:void(0)">
+                  <span>Header Dark</span>
+                </a>
+                <!-- END Header Styles -->
+              </div>
+            </div>
+            <!-- END Options -->
+
+            <!-- Close Sidebar, Visible only on mobile screens -->
+            <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+            <a class="d-lg-none btn btn-sm btn-alt-secondary ms-1" data-toggle="layout" data-action="sidebar_close" href="javascript:void(0)">
+              <i class="fa fa-fw fa-times"></i>
+            </a>
+            <!-- END Close Sidebar -->
+          </div>
+          <!-- END Extra -->
+        </div>
+        <!-- END Side Header -->
+
+        <!-- Sidebar Scrolling -->
+        <div class="js-sidebar-scroll">
+          <!-- Side Navigation -->
+          <div class="content-side">
+            <ul class="nav-main">
+              <li class="nav-main-item">
+                <a class="nav-main-link" href="be_pages_dashboard.html">
+                  <i class="nav-main-link-icon si si-speedometer"></i>
+                  <span class="nav-main-link-name">Dashboard</span>
+                </a>
+              </li>
+              
+                
+                 
+          </div>
+          <!-- END Side Navigation -->
+        </div>
+        <!-- END Sidebar Scrolling -->
+      </nav>
+      <!-- END Sidebar -->
+
+      <!-- Header -->
+      <header id="page-header">
+        <!-- Header Content -->
+        <div class="content-header">
+          <!-- Left Section -->
+          <div class="d-flex align-items-center">
+            <!-- Toggle Sidebar -->
+            <!-- Layout API, functionality initialized in Template._uiApiLayout()-->
+            <button type="button" class="btn btn-sm btn-alt-secondary me-2 d-lg-none" data-toggle="layout" data-action="sidebar_toggle">
+              <i class="fa fa-fw fa-bars"></i>
+            </button>
+            <!-- END Toggle Sidebar -->
+
+            <!-- Open Search Section (visible on smaller screens) -->
+            <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+            <button type="button" class="btn btn-sm btn-alt-secondary d-md-none" data-toggle="layout" data-action="header_search_on">
+              <i class="fa fa-fw fa-search"></i>
+            </button>
+            <!-- END Open Search Section -->
+
+            <!-- Search Form (visible on larger screens) -->
+            <form class="d-none d-md-inline-block" action="be_pages_generic_search.html" method="POST">
+              <div class="input-group input-group-sm">
+                <input type="text" class="form-control form-control-alt" placeholder="Search.." id="page-header-search-input2" name="page-header-search-input2">
+                <span class="input-group-text border-0">
+                  <i class="fa fa-fw fa-search"></i>
+                </span>
+              </div>
+            </form>
+            <!-- END Search Form -->
+          </div>
+          <!-- END Left Section -->
+
+         <!-- Right Section -->
+         <div class="d-flex align-items-center">
+            <!-- User Dropdown -->
+            <div class="dropdown d-inline-block ms-2">
+                <button type="button" class="btn btn-sm btn-alt-secondary d-flex align-items-center" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="rounded-circle" src="assets/media/avatars/avatar10.jpg" alt="Header Avatar" style="width: 21px;">
+                    <span class="d-none d-sm-inline-block ms-2" id="user-name"></span>
+                    <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block opacity-50 ms-1 mt-1"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-md dropdown-menu-end p-0 border-0" aria-labelledby="page-header-user-dropdown">
+                    <div class="p-3 text-center bg-body-light border-bottom rounded-top">
+                        <img class="img-avatar img-avatar48 img-avatar-thumb" src="assets/media/avatars/avatar10.jpg" alt="">
+                        <p class="mt-2 mb-0 fw-medium" id="user-fullname"></p>
+                        <p class="mt-2 mb-0 fw-medium" id="user-role"></p>
+                        
+                    </div>
+                    <div class="p-2">
+                        <a id="logout-link" class="dropdown-item d-flex align-items-center justify-content-between" href="#">
+                            <span class="fs-sm fw-medium">Log Out</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+           
+
+        <!-- Header Search -->
+        <div id="page-header-search" class="overlay-header bg-body-extra-light">
+          <div class="content-header">
+            <form class="w-100" action="be_pages_generic_search.html" method="POST">
+              <div class="input-group">
+                <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                <button type="button" class="btn btn-alt-danger" data-toggle="layout" data-action="header_search_off">
+                  <i class="fa fa-fw fa-times-circle"></i>
+                </button>
+                <input type="text" class="form-control" placeholder="Search or hit ESC.." id="page-header-search-input" name="page-header-search-input">
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- END Header Search -->
+
+        <!-- Header Loader -->
+        <!-- Please check out the Loaders page under Components category to see examples of showing/hiding it -->
+        <div id="page-header-loader" class="overlay-header bg-body-extra-light">
+          <div class="content-header">
+            <div class="w-100 text-center">
+              <i class="fa fa-fw fa-circle-notch fa-spin"></i>
+            </div>
+          </div>
+        </div>
+        <!-- END Header Loader -->
+      </header>
+      <!-- END Header -->
+
+      <!-- Main Container -->
+      <main id="main-container">
+        <!-- Hero -->
+        <div class="bg-body-light">
+          <div class="content content-full">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2">
+              <div class="flex-grow-1">
+                <h1 class="h3 fw-bold mb-1">
+                  Liste des employés
+                </h1>
+                <h2 class="fs-base lh-base fw-medium text-muted mb-0">
+                  
+                </h2>
+              </div>
+              <nav class="flex-shrink-0 mt-3 mt-sm-0 ms-sm-3" aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-alt">
+                  <li class="breadcrumb-item">
+                    <a class="link-fx" href="ainscription.html">Ajouter un nouvel utilisateur</a>
+                  </li>
+                  <li class="breadcrumb-item" aria-current="page">
+                    
+                  </li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <!-- END Hero -->
+
+        <!-- Page Content -->
+        <div class="content">
+            <!-- Full Table -->
+            <div class="block block-rounded">
+              <div class="block-header block-header-default">
+                <h3 class="block-title"></h3>
+                <div class="block-options">
+                  <button type="button" class="btn-block-option">
+                    <i class="si si-settings"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="block-content">
+                <p class="fs-sm text-muted">
+                  
+                </p>
+                <div class="table-responsive">
+                  <table class="table table-bordered table-striped table-vcenter" id="userTable">
+                    <thead>
+                      <tr>
+                        <th class="text-center" style="width: 100px;">
+                          <i class="far fa-user"></i>
+                        </th>
+                        <th style="width: 20%;">Name</th>
+                        <th>Surname</th>
+                        <th>Department</th>
+                        <th>Role</th>
+                        <th style="width: 40%;">Phone Number</th>
+                        <th style="width: 20%;">Email</th>
+                        
+                        <th class="text-center" style="width: 100px;">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Dynamic rows will be appended here -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+              <!-- END Contextual Table -->
+            </div>
+          </div>
+        </div>
+        <!-- END Page Content -->
+      </main>
+      <!-- END Main Container -->
+
+      <!-- Footer -->
+      <footer id="page-footer" class="bg-body-light">
+        <div class="content py-3">
+          <div class="row fs-sm">
+            <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-end">
+              Crafted with <i class="fa fa-heart text-danger"></i> by <a class="fw-semibold" href="https://pixelcave.com" target="_blank">pixelcave</a>
+            </div>
+            <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-start">
+              <a class="fw-semibold" href="https://pixelcave.com/products/oneui" target="_blank">OneUI 5.9</a> &copy; <span data-toggle="year-copy"></span>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- END Footer -->
+    </div>
+    <!-- END Page Container -->
+
+    <!--
+        OneUI JS
+
+        Core libraries and functionality
+        webpack is putting everything together at assets/_js/main/app.js
+    -->
+    <script src="assets/js/oneui.app.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+
+        
+document.addEventListener('DOMContentLoaded', function() {
+    const token = localStorage.getItem('token');
+    // Redirect to login page if token is not present
+    if (!token) {
+        window.location.href = 'aindex.html';
+        return; // Stop further execution
+    }
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+        fetch(`http://localhost:8080/api/users/${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status) {
+                    const user = data.data;
+                    document.getElementById('user-name').textContent = user.name;
+                    document.getElementById('user-fullname').textContent = `${user.name} `;
+                    document.getElementById('user-role').textContent = ` ${user.role.join(', ')}`;
+                } else {
+                    console.error('Failed to fetch user details:', data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    fetch('http://localhost:8080/api/users', {
+        method: 'GET',  // Keep GET method as your API expects it
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status) {
+            const tableBody = document.querySelector('#userTable tbody');
+            tableBody.innerHTML = ''; // Clear existing rows
+            data.data.sort((a, b) => a.id - b.id);
+
+            data.data.forEach(user => {
+                // Exclude admin user
+                if (user.email === 'admin@itsolutionstuff.com') {
+                    return;
+                }
+
+                const tr = document.createElement('tr');
+
+                tr.innerHTML = `
+                    <td class="text-center">
+                        <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar1.jpg" alt="">
+                    </td>
+                    <td class="fw-semibold fs-sm">
+                        <a href="be_pages_generic_profile.html">${user.name}</a>
+                    </td>
+                    <td class="fs-sm">${user.surname}</td>
+                    <td>
+                        <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-primary-light text-primary">${user.departement.join(', ')}</span>
+                    </td>
+                    <td>
+                        <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">${user.role.join(', ')}</span>
+                    </td>
+                    <td class="fs-sm">${user.phone_number}</td>
+                    <td class="fs-sm">${user.email}</td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <a href="aedit.html?id=${user.id}" class="btn btn-sm btn-alt-secondary edit-button" data-bs-toggle="tooltip" title="Edit">
+                                <i class="fa fa-fw fa-pencil-alt"></i>
+                            </a>
+                            <button type="button" class="btn btn-sm btn-alt-secondary delete-button" data-id="${user.id}" data-bs-toggle="tooltip" title="Delete">
+                                <i class="fa fa-fw fa-times"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+
+                tableBody.appendChild(tr);
+            });
+
+            // logout link
+            document.getElementById("logout-link").addEventListener("click", function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Do you really want to log out?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, log out!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        const token = localStorage.getItem('token');
+                        if (!token) {
+                            console.error('No token found in localStorage');
+                            return;
+                        }
+
+                        fetch('http://localhost:8080/api/logout', {
+                            method: 'GET',  // Keep GET method as your API expects it
+                            headers: {
+                                'Authorization': 'Bearer ' + token,
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                            },
+                        })
+                        .then(response => {
+                            if (response.status === 401) {
+                                throw new Error('Unauthorized');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.status) {
+                                localStorage.removeItem('token');
+                                // Redirect to the login page or perform any other necessary actions
+                                window.location.href = 'aindex.html';
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            // Handle unauthorized error (e.g., redirect to login page)
+                            window.location.href = 'aindex.html';
+                        });
+                    }
+                });
+            });
+
+            // Attach event listeners for delete buttons
+            document.querySelectorAll('.delete-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const userId = this.getAttribute('data-id');
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'You will not be able to recover this user!',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            fetch(`http://localhost:8080/api/users/${userId}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                                }
+                            })
+                            .then(response => response.json())
+                            .then(result => {
+                                if (result.status) {
+                                    this.closest('tr').remove();
+                                    Swal.fire('Deleted!', 'User has been deleted.', 'success');
+                                } else {
+                                    Swal.fire('Error!', 'Failed to delete user.', 'error');
+                                }
+                            })
+                            .catch(error => console.error('Error deleting user:', error));
+                        }
+                    });
+                });
+            });
+
+        } else {
+            alert('Failed to fetch user data.');
+        }
+    })
+    .catch(error => console.error('Error fetching data:', error));
+});
+    </script>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>OneUI - Bootstrap 5 Admin Template &amp; UI Framework</title>
+    <meta name="description" content="OneUI - Bootstrap 5 Admin Template &amp; UI Framework created by pixelcave">
+    <meta name="author" content="pixelcave">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="OneUI - Bootstrap 5 Admin Template &amp; UI Framework">
+    <meta property="og:site_name" content="OneUI">
+    <meta property="og:description" content="OneUI - Bootstrap 5 Admin Template &amp; UI Framework created by pixelcave">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <link rel="shortcut icon" href="assets/media/favicons/favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/media/favicons/favicon-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/media/favicons/apple-touch-icon-180x180.png">
+    <link rel="stylesheet" id="css-main" href="assets/css/oneui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  </head>
+
+  <body>
+    <div id="page-container">
+      <main id="main-container">
+        <div class="hero-static d-flex align-items-center">
+          <div class="content">
+            <div class="row justify-content-center push">
+              <div class="col-md-8 col-lg-6 col-xl-4">
+                <div class="block block-rounded mb-0">
+                  <div class="block-header block-header-default">
+                    <h3 class="block-title">Connectez vous!</h3>
+                    <div class="block-options"></div>
+                  </div>
+                  <div class="block-content">
+                    <div class="p-sm-3 px-lg-4 px-xxl-5 py-lg-5">
+                      <h1 class="h2 mb-1">Transit Master</h1>
+                      <p class="fw-medium text-muted">Bienvenue, veuillez vous connecter.</p>
+
+                      <form id="login-form" class="js-validation-signin">
+                        <div class="py-3">
+                          <div class="mb-4">
+                            <input type="text" class="form-control form-control-alt form-control-lg" id="login-username" name="login-username" placeholder="Email">
+                          </div>
+                          <div class="mb-4">
+                            <input type="password" class="form-control form-control-alt form-control-lg" id="login-password" name="login-password" placeholder="Mot de passe">
+                          </div>
+                          <div class="mb-4">
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="" id="login-remember" name="login-remember">
+                              <label class="form-check-label" for="login-remember">Remember Me</label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mb-4">
+                          <div class="col-md-6 col-xl-5">
+                            <button type="submit" class="btn w-100 btn-alt-primary">
+                              <i class="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i> Sign In
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                      <div id="login-error" class="text-danger" style="display: none;">Invalid login credentials.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fs-sm text-muted text-center">
+              <strong>OneUI 5.9</strong> &copy; <span data-toggle="year-copy"></span>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="assets/js/oneui.app.min.js"></script>
+    <script src="assets/js/lib/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="assets/js/pages/op_auth_signin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      document.getElementById('login-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const email = document.getElementById('login-username').value;
+  const password = document.getElementById('login-password').value;
+
+  fetch('http://localhost:8080/api/connexion', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email: email,
+      password: password,
+    }),
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.status) {
+      console.log('User authenticated successfully');
+
+      // Display success notification using SweetAlert
+      Swal.fire({
+        icon: 'success',
+        title: 'Login successful!',
+        text: 'Redirecting...',
+        showConfirmButton: false,
+        timer: 1000, // 1000 milliseconds (1 second) timer
+      });
+
+      // Store the user ID and token in localStorage
+      localStorage.setItem('userId', data.id);
+      localStorage.setItem('token', data.token);
+
+      // Check if the user is an admin
+      fetch('http://localhost:8080/api/check-admin', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${data.token}`,
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(response => response.json())
+      .then(adminData => {
+        if (adminData.isAdmin) {
+          // Delay the redirection to ensure the notification is displayed
+          setTimeout(() => {
+            // Redirect to the dashboard section
+            window.location.href = 'adashboard.html';
+          }, 1000); // 1000 milliseconds (1 second) delay
+        } else {
+          document.getElementById('login-error').textContent = 'You do not have permission to access this page.';
+          document.getElementById('login-error').style.display = 'block';
+          Swal.fire({
+            icon: 'error',
+            title: 'Access Denied',
+            text: 'You do not have permission to access this page.',
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('login-error').textContent = 'An error occurred while checking admin status. Please try again.';
+        document.getElementById('login-error').style.display = 'block';
+      });
+    } else {
+      // Show error message
+      document.getElementById('login-error').textContent = data.message || 'Invalid login credentials.';
+      document.getElementById('login-error').style.display = 'block';
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    document.getElementById('login-error').textContent = 'An error occurred. Please try again.';
+    document.getElementById('login-error').style.display = 'block';
+  });
+});
+
+    </script>
+  </body>
+</html>
+
+
+
