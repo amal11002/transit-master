@@ -127,24 +127,55 @@
       .then(response => response.json())
       .then(adminData => {
         if (adminData.isAdmin) {
-          // Delay the redirection to ensure the notification is displayed
-          setTimeout(() => {
-            // Redirect to the dashboard section
-            window.location.href = 'adashboard.html';
-          }, 1000); // 1000 milliseconds (1 second) delay
+          // Redirect to the admin dashboard
+          window.location.href = 'adashboard.html';
         } else {
-          document.getElementById('login-error').textContent = 'You do not have permission to access this page.';
-          document.getElementById('login-error').style.display = 'block';
-          Swal.fire({
-            icon: 'error',
-            title: 'Access Denied',
-            text: 'You do not have permission to access this page.',
+          // Redirect based on department
+          fetch('http://localhost:8080/api/check-roleanddepartement', {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${data.token}`,
+              'Content-Type': 'application/json',
+            },
+          })
+          .then(response => response.json())
+          .then(roleDeptData => {
+  console.log('API Response:', roleDeptData);
+
+  if (roleDeptData.status && roleDeptData.department) {
+    const departmentId = Object.keys(roleDeptData.department)[0];
+    const departmentName = roleDeptData.department[departmentId];
+    console.log('Department ID:', departmentId);
+    console.log('Department Name:', departmentName);
+
+    // Redirect based on department
+    switch(departmentId) {
+      case '1':
+        window.location.href = 'adepartement1.html';
+        break;
+      case '2':
+        window.location.href = 'adepartement2.html';
+        break;
+      default:
+        window.location.href = 'adepartement3.html';
+        break;
+    }
+            } else {
+              console.error('Invalid department data:', roleDeptData.departement);
+              document.getElementById('login-error').textContent = 'Invalid department information.';
+              document.getElementById('login-error').style.display = 'block';
+            }
+          })
+          .catch(error => {
+            console.error('Error fetching role and department:', error);
+            document.getElementById('login-error').textContent = 'Error fetching department information.';
+            document.getElementById('login-error').style.display = 'block';
           });
         }
       })
       .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('login-error').textContent = 'An error occurred while checking admin status. Please try again.';
+        console.error('Error checking admin status:', error);
+        document.getElementById('login-error').textContent = 'Error checking admin status.';
         document.getElementById('login-error').style.display = 'block';
       });
     } else {
@@ -159,6 +190,7 @@
     document.getElementById('login-error').style.display = 'block';
   });
 });
+
 
     </script>
   </body>
