@@ -512,6 +512,19 @@
             window.location.href = 'aindex.html';
             return; // Stop further execution
         }
+        fetch('http://localhost:8080/api/verify-token', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status && !data.isAdmin) {
+            // Redirect to aindex.html if the user is not an admin
+            window.location.href = 'aindex.html';
+            return; // Stop further execution
+        }
         const userId = localStorage.getItem('userId'); // Corrected 'id' here
         if (userId) {
             fetch(`http://localhost:8080/api/users/${userId}`)
@@ -670,6 +683,8 @@
             console.error('Error:', error);
         });
     });
+  })
+        .catch(error => console.error('Error:', error));
 </script>
 
 </script>

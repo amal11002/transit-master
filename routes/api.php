@@ -13,6 +13,7 @@ Route::post("connexion", [ApiController::class, "connexion"]);
 
 Route::middleware('auth:sanctum')->get('check-admin', [ApiController::class, 'checkAdmin']);
 Route::middleware('auth:sanctum')->get('check-roleanddepartement', [ApiController::class, 'checkUserRoleAndDepartment']);
+Route::middleware('auth:sanctum')->get('verify-token', [ApiController::class, 'verifyToken']);
 
 //log
 Route::middleware('auth:sanctum')->group(function (){

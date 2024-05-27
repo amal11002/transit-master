@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Str;
+
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Facades\JWTAuth;
+
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -184,6 +189,53 @@ public function checkAdmin(Request $request)
         ], 500);
     }
 }
+public function verifyToken(Request $request)
+{
+    try {
+        $token = $request->header('Authorization');
+
+        if (!$token || !Str::startsWith($token, 'Bearer ')) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Invalid token format',
+            ], 401);
+        }
+
+        $token = Str::after($token, 'Bearer '); // Remove 'Bearer ' prefix
+
+        // Retrieve the hashed token from the database (assuming it's stored there)
+        $user = User::whereHas('tokens', function ($query) use ($token) {
+            $query->where('id', $token); // Check for the ID instead of the token
+        })->first();
+
+        if (!$user) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Invalid token',
+            ], 401);
+        }
+
+        // Check if the user is an admin
+        if ($user->type2 === 'admin') {
+            return response()->json([
+                'status' => true,
+                'isAdmin' => true,
+            ], 200);
+        }
+
+        return response()->json([
+            'status' => true,
+            'isAdmin' => false,
+        ], 200);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => false,
+            'message' => $e->getMessage(),
+        ], 500);
+    }
+}
+
 
 
     
