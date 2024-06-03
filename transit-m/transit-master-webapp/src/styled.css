@@ -1,0 +1,106 @@
+.nav-main-submenu {
+    display: none;
+  }
+  
+  .nav-main-submenu.show {
+    display: block;
+  }
+  
+  .custom-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px;
+    margin-top: 30px;
+    margin-left: 20px;
+  }
+  
+  .custom-col {
+    flex: 0 0 auto;
+    width: calc(33.3333% - 20px); /* 3 éléments par ligne avec une marge de 10px entre chaque élément */
+    max-width: calc(33.3333% - 20px);
+    padding: 10px;
+  }
+  
+  .custom-block {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .custom-block:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .custom-block-rounded {
+    border-radius: 10px; /* ou tout autre valeur de votre choix */
+  }
+  
+  .custom-block-link-pop {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .custom-bg-dusk {
+    background-color: #293145;
+  }
+  
+  .custom-bg-sea {
+    background-color: #4ab3f4;
+  }
+  
+  .custom-bg-fruit {
+    background-color: #f2a654;
+  }
+  
+  .custom-block-content {
+    padding: 10px;
+  }
+  
+  .custom-block-content-full {
+    width: 100%;
+  }
+  
+  .custom-text-center {
+    text-align: center;
+  }
+  
+  .custom-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px; /* ou toute autre valeur de votre choix */
+    height: 40px; /* ou toute autre valeur de votre choix */
+    margin: 0 auto 5px;
+  }
+  
+  .custom-item-circle {
+    border-radius: 50%;
+  }
+  
+  .custom-bg-black-25 {
+    background-color: rgba(0,0,0,0.25);
+  }
+  
+  .custom-text-white {
+    color: #fff;
+  }
+  
+  .custom-text-white-75 {
+    color: rgba(255,255,255,0.75);
+  }
+  
+  .custom-fs-lg {
+    font-size: 16px; /* ou toute autre valeur de votre choix */
+  }
+  
+  .custom-mt-3 {
+    margin-top: 15px; /* ou toute autre valeur de votre choix */
+  }
+  
+  .custom-mb-0 {
+    margin-bottom: 0;
+ }
