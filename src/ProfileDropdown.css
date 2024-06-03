@@ -1,0 +1,44 @@
+/* UserDropdown.css */
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-button {
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu div {
+    padding: 8px 16px;
+}
+
+.dropdown-menu a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    padding: 8px 16px;
+}
+
+.dropdown-menu a:hover {
+    background-color: #ddd;
+}
