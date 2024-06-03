@@ -174,12 +174,14 @@ public function checkAdmin(Request $request)
             return response()->json([
                 'status' => true,
                 'isAdmin' => true,
+                'id' => $user->id, // Return the user ID
             ], 200);
         }
 
         return response()->json([
             'status' => true,
             'isAdmin' => false,
+            'id' => $user->id, // Return the user ID
         ], 200);
 
     } catch (\Throwable $th) {
@@ -189,6 +191,7 @@ public function checkAdmin(Request $request)
         ], 500);
     }
 }
+
 public function verifyToken(Request $request)
 {
     try {
