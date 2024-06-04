@@ -1,0 +1,208 @@
+/* DossierComponent.css */
+
+/* Style de base pour la table */
+table {
+    width: 86%;
+    border-collapse: collapse;
+    margin: 10px ;
+    margin-left: 190px;
+    font-size: 18px;
+    text-align: left;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-left: black 3px solid ;
+    border-right: black 3px solid ;
+}
+
+thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+th {
+    padding: 12px 5px;
+    
+}
+
+tbody tr td {
+    border-bottom: 1px solid #070505;
+    padding-left: 4px;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+/* Style pour les boutons */
+button {
+   width: 100px;
+   height: 50px;
+    justify-content: center;
+    padding-top: 2px;
+margin-bottom: 2px;
+font-weight: bold;    
+    border: 2px solid blueviolet;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #7ebbf0;
+  
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.view {
+    background-color: #3498db;
+    color: #ffffff;
+    height: 50px;
+    width:50px;
+}
+.create{
+    background-color: #a2f41e;
+    color: #ffffff;
+    height: 50px;
+    width:50px;
+
+
+}
+
+button.edit {
+    background-color: #2ecc71;
+    color: #ffffff;
+    height: 50px;
+    width:50px;
+    margin-left: 4px;
+}
+
+button.delete {
+    background-color: #e6210b;
+    color: #ffffff;
+    height: 50px;
+    width:50px;
+    margin-left: 4px;
+
+}
+
+button.add {
+    background-color: #009879;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+/* Style pour les modales */
+.modal {
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-radius: 8px;
+    width: 50%;
+}
+
+.modal h2 {
+    margin-top: 0;
+}
+
+.modal form div {
+    margin-bottom: 15px;
+}
+
+.modal form label {
+    display: block;
+  
+}
+
+.modal form input[type="text"], .modal form input[type="date"], .modal form input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+}
+
+.modal button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal button[type="submit"] {
+    background-color: #2ecc71;
+    color: #ffffff;
+}
+
+.modal button[type="button"] {
+    background-color: #e74c3c;
+    color: #ffffff;
+    margin-left: 10px;
+}
+
+.modal button[type="button"]:hover, .modal button[type="submit"]:hover {
+    opacity: 0.8;
+}
+.modal {
+    position: fixed;
+    top: 300px;
+    left: 700px;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 500px;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.form-actions button {
+    margin-left: 10px;
+}
+
