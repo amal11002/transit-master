@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\DepartementController;
+use App\Http\Controllers\DossierController;
+use App\Http\Controllers\FichierController;
 
 //register
 Route::post('inscription', [ApiController::class, 'inscription']);
@@ -46,17 +48,10 @@ Route::get('/role', [RoleController::class, 'index']);
 Route::get('/departement', [DepartementController::class, 'index']);
 Route::get('/get-token', [ApiController::class, 'getToken']);
 
-
-
-// Route::middleware(['auth', 'user-access:user'])->group(function () {
-//     Route::get('/user', [ApiController::class, 'user']);
-// });
-
-// Route::middleware(['auth', 'user-access:admin'])->group(function () {
-//     Route::get('/admin', [ApiController::class, 'admin']);
-// });
-
-// Route::middleware(['auth', 'user-access:manager'])->group(function () {
-//     Route::get('/manager', [ApiController::class, 'manager']);
-// });
+Route::post('/dossiers', [DossierController::class, 'store']);
+Route::post('/fichiers', [FichierController::class, 'store']);
+Route::get('/dossiers', [DossierController::class, 'index']);
+Route::get('/dossiers/{id}', [DossierController::class, 'show']);
+Route::put('/dossiers/{id}', [DossierController::class, 'update']);
+Route::delete('/dossiers/{id}', [DossierController::class, 'destroy']);
 
