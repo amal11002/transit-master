@@ -44,6 +44,7 @@ Route::put('users/{id}/update-role', [ApiController::class, 'updateUserRole']);
 // Role and departement routes
 Route::get('/role', [RoleController::class, 'index']);
 Route::get('/departement', [DepartementController::class, 'index']);
+Route::get('/get-token', [ApiController::class, 'getToken']);
 
 
 

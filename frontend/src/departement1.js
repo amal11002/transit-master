@@ -51,49 +51,46 @@ const Departement1 = () => {
   };
 
   const navigateTo = (path) => {
-    // Vérifier si l'état utilisateur est vide
     if (Object.keys(user).length === 0) {
       Swal.fire({
-          icon: 'info',
-          title: 'Chargement en cours...',
-          text: 'Veuillez patienter.',
+        icon: 'info',
+        title: 'Chargement en cours...',
+        text: 'Veuillez patienter.',
       });
       return;
-  }
+    }
 
-  const userRole = user.data.role || [];
-  let allowed = false;
+    const userRole = user.data?.role || [];
+    let allowed = false;
 
-  switch(path) {
+    switch(path) {
       case '/chef1':
-          allowed = userRole.includes('Chef departement');
-          break;
+        allowed = userRole.includes('Chef departement');
+        break;
       case '/assistant1':
-          allowed = userRole.includes('Assistant departement') || userRole.includes('Chef departement');
-          break;
+        allowed = userRole.includes('Assistant departement') || userRole.includes('Chef departement');
+        break;
       case '/commercial':
-          allowed = userRole.includes('Commercial') || userRole.includes('Chef departement');
-          break;
+        allowed = userRole.includes('Commercial') || userRole.includes('Chef departement');
+        break;
       default:
-          allowed = false;
-  }
+        allowed = false;
+    }
 
-  if (allowed) {
+    if (allowed) {
       navigate(path);
-  } else {
+    } else {
       Swal.fire({
-          icon: 'error',
-          title: 'Accès refusé',
-          text: 'Vous n\'êtes pas autorisé à accéder à cette page.',
+        icon: 'error',
+        title: 'Accès refusé',
+        text: 'Vous n\'êtes pas autorisé à accéder à cette page.',
       });
-  }
+    }
   };
 
   return (
     <div id="page-container" className="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
-      {/* Sidebar and header code remains the same */}
       <nav id="sidebar" aria-label="Main Navigation">
-        {/* Sidebar content remains the same */}
         <div className="js-sidebar-scroll">
           <div className="content-side">
             <ul className="nav-main">
@@ -104,36 +101,30 @@ const Departement1 = () => {
                 </a>
               </li>
               <li className="nav-main-heading">Departement commercial</li>
-              <li className="nav-main-item">
-                <a
-                  className="nav-main-link"
-                  href="#!"
-                  onClick={() => navigateTo('/chef1')}
-                >
-                  <i className="nav-main-link-icon si si-energy"></i>
-                  <span className="nav-main-link-name">Chef departement</span>
-                </a>
-              </li>
-              <li className="nav-main-item">
-                <a
-                  className="nav-main-link"
-                  href="#!"
-                  onClick={() => navigateTo('/assistant1')}
-                >
-                  <i className="nav-main-link-icon si si-energy"></i>
-                  <span className="nav-main-link-name">Assistant département</span>
-                </a>
-              </li>
-              <li className="nav-main-item">
-                <a
-                  className="nav-main-link"
-                  href="#!"
-                  onClick={() => navigateTo('/commercial')}
-                >
-                  <i className="nav-main-link-icon si si-energy"></i>
-                  <span className="nav-main-link-name">Commercial</span>
-                </a>
-              </li>
+              {user.data?.role?.includes('Chef departement') && (
+                <li className="nav-main-item">
+                  <a className="nav-main-link" href="#!" onClick={() => navigateTo('/chef1')}>
+                    <i className="nav-main-link-icon si si-energy"></i>
+                    <span className="nav-main-link-name">Chef departement</span>
+                  </a>
+                </li>
+              )}
+              {(user.data?.role?.includes('Assistant departement') || user.data?.role?.includes('Chef departement')) && (
+                <li className="nav-main-item">
+                  <a className="nav-main-link" href="#!" onClick={() => navigateTo('/assistant1')}>
+                    <i className="nav-main-link-icon si si-energy"></i>
+                    <span className="nav-main-link-name">Assistant département</span>
+                  </a>
+                </li>
+              )}
+              {(user.data?.role?.includes('Commercial') || user.data?.role?.includes('Chef departement')) && (
+                <li className="nav-main-item">
+                  <a className="nav-main-link" href="#!" onClick={() => navigateTo('/commercial')}>
+                    <i className="nav-main-link-icon si si-energy"></i>
+                    <span className="nav-main-link-name">Commercial</span>
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </div>
@@ -153,7 +144,6 @@ const Departement1 = () => {
             <ProfileDropdown user={user} />
           </div>
         </div>
-
         <div id="page-header-search" className="overlay-header bg-body-extra-light">
           <div className="content-header">
             <form className="w-100" method="POST">
@@ -166,7 +156,6 @@ const Departement1 = () => {
             </form>
           </div>
         </div>
-
         <div id="page-header-loader" className="overlay-header bg-primary-lighter">
           <div className="content-header">
             <div className="w-100 text-center">
@@ -185,68 +174,61 @@ const Departement1 = () => {
           </div>
         </div>
         <div className="custom-content">
-  <div className="custom-row">
-    <div className="custom-col">
-      <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-dusk"  onClick={() => navigateTo('/chef1')}>
-        <div className="custom-block-content custom-block-content-full custom-text-center" onMouseEnter={(e) => e.currentTarget.style.color = '#fff'} onMouseLeave={(e) => e.currentTarget.style.color = '#000'}>
-          <div className="custom-item custom-item-circle custom-bg-black-25">
-            <i className="fa fa-users custom-text-white"></i>
+          <div className="custom-row">
+            {user.data?.role?.includes('Chef departement') && (
+              <div className="custom-col">
+                <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-dusk" onClick={() => navigateTo('/chef1')}>
+                  <div className="custom-block-content custom-block-content-full custom-text-center" onMouseEnter={(e) => e.currentTarget.style.color = '#fff'} onMouseLeave={(e) => e.currentTarget.style.color = '#000'}>
+                    <div className="custom-item custom-item-circle custom-bg-black-25">
+                      <i className="fa fa-users custom-text-white"></i>
+                    </div>
+                    <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
+                      Chef département
+                    </p>
+                    <p className="custom-text-white-75 custom-mb-0">
+                      Département commercial
+                    </p>
+                  </div>
+                </a>
+              </div>
+            )}
+            {(user.data?.role?.includes('Assistant departement') || user.data?.role?.includes('Chef departement')) && (
+              <div className="custom-col">
+                <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-sea" onClick={() => navigateTo('/assistant1')}>
+                  <div className="custom-block-content custom-block-content-full custom-text-center">
+                    <div className="custom-item custom-item-circle custom-bg-black-25">
+                      <i className="fa fa-handshake custom-text-white"></i>
+                    </div>
+                    <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
+                      Assistant département
+                    </p>
+                    <p className="custom-text-white-75 custom-mb-0">
+                      Sous la responsabilité du chef de département
+                    </p>
+                  </div>
+                </a>
+              </div>
+            )}
+            {(user.data?.role?.includes('Commercial') || user.data?.role?.includes('Chef departement')) && (
+              <div className="custom-col">
+                <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-fruit" onClick={() => navigateTo('/commercial')}>
+                  <div className="custom-block-content custom-block-content-full custom-text-center">
+                    <div className="custom-item custom-item-circle custom-bg-black-25">
+                      <i className="fa fa-chart-line custom-text-white"></i>
+                    </div>
+                    <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
+                      Commercial
+                    </p>
+                    <p className="custom-text-white-75 custom-mb-0">
+                      Chargé de la vente
+                    </p>
+                  </div>
+                </a>
+              </div>
+            )}
           </div>
-          <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
-            Chef département
-          </p>
-          <p className="custom-text-white-75 custom-mb-0">
-            Département commercial
-          </p>
         </div>
-      </a>
-    </div>
-    <div className="custom-col">
-      <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-sea"  onClick={() => navigateTo('/assistant1')}>
-        <div className="custom-block-content custom-block-content-full custom-text-center">
-          <div className="custom-item custom-item-circle custom-bg-black-25">
-            <i className="fa fa-handshake custom-text-white"></i>
-          </div>
-          <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
-            Assistant département
-          </p>
-          <p className="custom-text-white-75 custom-mb-0">
-            Sous la responsabilité du chef de département
-          </p>
-        </div>
-      </a>
-    </div>
-    <div className="custom-col">
-      <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-fruit"  onClick={() => navigateTo('/commercial')}>
-        <div className="custom-block-content custom-block-content-full custom-text-center">
-          <div className="custom-item custom-item-circle custom-bg-black-25">
-            <i className="fa fa-chart-bar custom-text-white"></i>
-          </div>
-          <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
-            Commercial
-          </p>
-          <p className="custom-text-white-75 custom-mb-0">
-            Sous la responsabilité du chef de département
-          </p>
-        </div>
-      </a>
-    </div>
-  </div>
-</div>
-
-
       </main>
-
-      <footer id="page-footer" className="bg-body-light">
-        <div className="content py-3">
-          <div className="row fs-sm">
-            <div className="col-sm-6 order-sm-1 text-center text-sm-start">
-              <a className="fw-semibold" href="https://1.envato.market/ydb" target="_blank" rel="noreferrer">Transit Master</a> &copy; <span data-toggle="year-copy"></span>
-            </div>
-            
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

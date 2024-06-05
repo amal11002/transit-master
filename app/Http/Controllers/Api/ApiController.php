@@ -57,7 +57,7 @@ class ApiController extends Controller
             'surname' => $request->surname,
             'email' => $request->email,
             'phone_number' => $request->phone_number,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
         ]);
 
         // Attach roles and departements to the user
@@ -129,6 +129,32 @@ class ApiController extends Controller
         ],500);
     }
 }
+public function getToken(Request $request){
+    try{
+        $user = User::where('email',$request->email)->first();
+        if (!$user) {
+            return response()->json([
+                'status'=> false,
+                'message'=>'User not found',
+            ], 404);
+        }
+
+        return response()->json([
+            'status'=> true,
+            'id' => $user->id,
+            'message'=>'Token retrieved successfully',
+            'token' => $user->createToken("API TOKEN")->plainTextToken
+        ],200);
+
+    }
+    catch(\Throwable $th){
+        return response()->json([
+            'status'=> false,
+            'message'=>$th->getMessage() ,
+        ],500);
+    }
+}
+
 public function profile()
 {  $user = Auth::user();
 
@@ -313,44 +339,49 @@ public function verifyToken(Request $request)
             'data' => $user,
         ], 201);
     }
-public function updateUser(Request $request, $id)
-{
-    if (auth()->user()->type2 !== 'admin') {
-        return response()->json(['error' => 'Unauthorized. Only administrators can update users.'], 403);
-    }
-    $user = User::findOrFail($id);
-
-    // Validation
-    $validator = Validator::make($request->all(), [
-        'name' => 'nullable',
-        'surname' => 'nullable',
-        'email' => 'nullable|email|unique:users,email,' . $user->id,
-        'phone_number' => 'nullable',
-        'password' => 'nullable',
-    ]);
-
-    if ($validator->fails()) {
+    public function updateUser(Request $request, $id) {
+        if (auth()->user()->type2 !== 'admin') {
+            return response()->json(['error' => 'Unauthorized. Only administrators can update users.'], 403);
+        }
+    
+        $user = User::findOrFail($id);
+    
+        // Validation
+        $validator = Validator::make($request->all(), [
+            'name' => 'nullable',
+            'surname' => 'nullable',
+            'email' => 'nullable|email|unique:users,email,' . $user->id,
+            'phone_number' => 'nullable',
+            // Remove password from validation rules
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ], 400);
+        }
+    
+        // Update the user
+        $user->name = $request->name;
+        $user->surname = $request->surname;
+        $user->email = $request->email;
+        $user->phone_number = $request->phone_number;
+        // Do not update the password
+        $user->save();
+    
         return response()->json([
-            'status' => false,
-            'message' => 'Validation error',
-            'errors' => $validator->errors(),
-        ], 400);
+            'status' => true,
+            'message' => 'User updated successfully',
+            'data' => [
+                'user' => $user,
+            ],
+        ], 200);
     }
-
-    // Update the user
-    $user->name = $request->name;
-    $user->surname = $request->surname;
-    $user->email = $request->email;
-    $user->phone_number = $request->phone_number;
-    $user->password = Hash::make($request->password);
-    $user->save();
-
-    return response()->json([
-        'status' => true,
-        'message' => 'User updated successfully',
-        'data' => $user,
-    ], 200);
-}
+    
+    
+    
 
 public function deleteUser($id)
 {

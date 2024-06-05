@@ -47,4 +47,6 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Departement::class, 'user_departement', 'user_id', 'departement_id');
     }
+
+    
 }

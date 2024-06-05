@@ -87,6 +87,11 @@ const Login = () => {
                     window.location.href = '/departement3';
                     break;
                 }
+                  if (data.token) {
+          // Update the token in sessionStorage
+          sessionStorage.setItem('token', data.token);
+          console.log('Token updated successfully:', data.token);
+        }
               } else {
                 console.error('Invalid department data:', roleDeptData.departement);
                 // Handle error
@@ -112,7 +117,6 @@ const Login = () => {
       // Handle error
     });
   };
-
   return (
     <div className="main-layout">
       <div id="page-container">
@@ -193,4 +197,4 @@ const Login = () => {
   );
 }
 
-export default Login;
+export default Login; 

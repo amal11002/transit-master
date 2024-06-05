@@ -143,7 +143,7 @@ const Dashboard = () => {
             if (result.isConfirmed) {
                 const token = sessionStorage.setItem('token');
                 if (!token) {
-                    console.error('No token found in localStorage');
+                    console.error('No token found in sessionStorage');
                     return;
                 }
 
@@ -163,7 +163,7 @@ const Dashboard = () => {
                 })
                 .then(data => {
                     if (data.status) {
-                        localStorage.removeItem('token');
+                        sessionStorage.removeItem('token');
                         Swal.fire({
                             icon: 'success',
                             title: 'Logged Out',
@@ -874,7 +874,7 @@ const EditForm = ({ user, departments, roles, updateUser, onClose }) => {
     const [name, setName] = useState(user.name);
     const [surname, setSurname] = useState(user.surname);
     const [department, setDepartment] = useState(user.department);
-    const [roleIds, setRoleIds] = useState(user.roles ? user.roles.map(role => role.id) : []);
+    const [roleIds, setRoleIds] = useState([]);
     const [phone_number, setPhoneNumber] = useState(user.phone_number);
     const [email, setEmail] = useState(user.email);
 
@@ -886,13 +886,12 @@ const EditForm = ({ user, departments, roles, updateUser, onClose }) => {
             phone_number: phone_number,
             email: email
         };
-        
     
         fetch(`http://localhost:8080/api/users/${user.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + sessionStorage.setItem('token')
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
             },
             body: JSON.stringify(updatedUser)
         })
@@ -905,92 +904,98 @@ const EditForm = ({ user, departments, roles, updateUser, onClose }) => {
         .then(data => {
             if (data.status) {
                 // Update department if it has changed
-            if (user.department !== department) {
-                const updatedDepartmentData = {
-                    departement_ids: [department]
-                };
-                fetch(`http://localhost:8080/api/users/${user.id}/update-departement`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + sessionStorage.setItem('token')
-                    },
-                    body: JSON.stringify(updatedDepartmentData)
-                })
-                .then(departmentResponse => {
-                    if (!departmentResponse.ok) {
-                        throw new Error('Failed to update department.');
-                    }
-                    return departmentResponse.json();
-                })
-                .catch(error => {
-                    console.error('Error updating department:', error);
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'Failed to update user department. Please check the console for more details.',
-                        icon: 'error'
+                if (user.department !== department) {
+                    const updatedDepartmentData = {
+                        departement_ids: [department]
+                    };
+                    fetch(`http://localhost:8080/api/users/${user.id}/update-departement`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+                        },
+                        body: JSON.stringify(updatedDepartmentData)
+                    })
+                    .then(departmentResponse => {
+                        if (!departmentResponse.ok) {
+                            throw new Error('Failed to update department.');
+                        }
+                        return departmentResponse.json();
+                    })
+                    .catch(error => {
+                        console.error('Error updating department:', error);
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Failed to update user department. Please check the console for more details.',
+                            icon: 'error'
+                        });
                     });
-                });
-            }
-
-            // Update role if it has changed
-            if (user.role !== roleIds[0]) {
-                const updatedRoleData = {
-                    role_ids: roleIds
-                };
-                fetch(`http://localhost:8080/api/users/${user.id}/update-role`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + sessionStorage.setItem('token')
-                    },
-                    body: JSON.stringify(updatedRoleData)
-                })
-                .then(roleResponse => {
-                    if (!roleResponse.ok) {
-                        throw new Error('Failed to update role.');
-                    }
-                    return roleResponse.json();
-                })
-                .catch(error => {
-                    console.error('Error updating role:', error);
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'Failed to update user role. Please check the console for more details.',
-                        icon: 'error'
+                }
+    
+                // Update role if it has changed
+                if (user.role !== roleIds[0]) {
+                    const updatedRoleData = {
+                        role_ids: roleIds
+                    };
+                    fetch(`http://localhost:8080/api/users/${user.id}/update-role`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+                        },
+                        body: JSON.stringify(updatedRoleData)
+                    })
+                    .then(roleResponse => {
+                        if (!roleResponse.ok) {
+                            throw new Error('Failed to update role.');
+                        }
+                        return roleResponse.json();
+                    })
+                    .catch(error => {
+                        console.error('Error updating role:', error);
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Failed to update user role. Please check the console for more details.',
+                            icon: 'error'
+                        });
                     });
+                }
+    
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'User updated successfully.',
+                    icon: 'success'
+                }).then(() => {
+                    onClose(); // Close the edit form after saving changes
+                    window.location.reload();
                 });
+            } else {
+                throw new Error('Failed to update user.');
             }
-
+        })
+        .catch(error => {
+            console.error('Error updating user:', error);
             Swal.fire({
-                title: 'Success!',
-                text: 'User updated successfully.',
-                icon: 'success'
-            }).then(() => {
-                onClose(); // Close the edit form after saving changes
-                window.location.reload();
+                title: 'Error!',
+                text: 'Failed to update user. Please check the console for more details.',
+                icon: 'error'
             });
-        } else {
-            throw new Error('Failed to update user.');
-        }
-    })
-    .catch(error => {
-        console.error('Error updating user:', error);
-        Swal.fire({
-            title: 'Error!',
-            text: 'Failed to update user. Please check the console for more details.',
-            icon: 'error'
         });
-    });
-};
-    const handleRoleChange = (roleId) => {
-        if (roleIds.includes(roleId)) {
-            setRoleIds(roleIds.filter(id => id !== roleId));
-        } else {
-            // Set roleIds to an array containing only the roleId string
-            setRoleIds([...roleIds, roleId]);
-        }
     };
+    
+    const handleRoleChange = (roleId) => {
+        setRoleIds(prevRoleIds => {
+            if (prevRoleIds.includes(roleId)) {
+                return prevRoleIds.filter(id => id !== roleId);
+            } else {
+                return [...prevRoleIds, roleId];
+            }
+        });
+    };
+
+    
+
+    
 
     return (
         <div className="modal-overlay">
@@ -1027,9 +1032,9 @@ const EditForm = ({ user, departments, roles, updateUser, onClose }) => {
                     <div className="col-12" id="roles-container" style={{ flex: '1 1 100%' }}>
                     {department === '1' && (
     <>
-        <label ></label>
-        <div>
-            <div >
+        <label style={{ marginBottom: '5px', color: '#555' }}>Roles</label>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div>
                 <input
                     type="checkbox"
                     value="1"
@@ -1037,7 +1042,7 @@ const EditForm = ({ user, departments, roles, updateUser, onClose }) => {
                     onChange={() => handleRoleChange('1')}
                     id="role1"
                 />
-                <label htmlFor="role1" >Chef departement</label>
+                <label htmlFor="role1" style={{ color: '#555' }}>Chef departement</label>
             </div>
             <div>
                 <input
@@ -1047,7 +1052,7 @@ const EditForm = ({ user, departments, roles, updateUser, onClose }) => {
                     onChange={() => handleRoleChange('7')}
                     id="role7"
                 />
-                <label htmlFor="role7" >Assistant département</label>
+                <label htmlFor="role7" style={{ color: '#555' }}>Assistant département</label>
             </div>
             <div>
                 <input
@@ -1057,7 +1062,7 @@ const EditForm = ({ user, departments, roles, updateUser, onClose }) => {
                     onChange={() => handleRoleChange('2')}
                     id="role2"
                 />
-                <label htmlFor="role2" >Commercial</label>
+                <label htmlFor="role2" style={{ color: '#555' }}>Commercial</label>
             </div>
         </div>
     </>
@@ -1065,8 +1070,8 @@ const EditForm = ({ user, departments, roles, updateUser, onClose }) => {
 
 {department === '2' && (
     <>
-        <label ></label>
-        <div >
+        <label style={{ marginBottom: '5px', color: '#555' }}>Roles</label>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div>
                 <input
                     type="checkbox"
@@ -1124,8 +1129,8 @@ const EditForm = ({ user, departments, roles, updateUser, onClose }) => {
 
 {department === '3' && (
     <>
-        <label ></label>
-        <div >
+        <label style={{ marginBottom: '5px', color: '#555' }}>Roles</label>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div>
                 <input
                     type="checkbox"
@@ -1168,9 +1173,6 @@ const EditForm = ({ user, departments, roles, updateUser, onClose }) => {
     );
     
 };
-
-
-
 
 
 export default Dashboard;

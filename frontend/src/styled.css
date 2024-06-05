@@ -8,7 +8,7 @@
   
   .custom-row {
     display: flex;
-    flex-wrap: wrap;
+    
     margin: -10px;
     margin-top: 30px;
     margin-left: 20px;
@@ -20,6 +20,27 @@
     max-width: calc(33.3333% - 20px);
     padding: 10px;
   }
+
+  /* Responsive styles */
+@media (max-width: 768px) {
+  /* Adjust layout for smaller screens (e.g., mobile) */
+  .custom-col {
+    width: 100%; /* Make columns full width on small screens */
+  }
+  .nav-main-submenu.show{
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  /* Adjust layout for medium screens (e.g., tablets) */
+  .custom-col {
+    width: 50%; /* Make columns half width on medium screens */
+  }
+  .nav-main-submenu.show{
+    width: 50%;
+  }
+}
   
   .custom-block {
     display: block;

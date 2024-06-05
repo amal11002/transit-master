@@ -51,49 +51,50 @@ const Departement2 = () => {
   };
 
   const navigateTo = (path) => {
-    // Vérifier si l'état utilisateur est vide
     if (Object.keys(user).length === 0) {
       Swal.fire({
-          icon: 'info',
-          title: 'Chargement en cours...',
-          text: 'Veuillez patienter.',
+        icon: 'info',
+        title: 'Chargement en cours...',
+        text: 'Veuillez patienter.',
       });
       return;
-  }
+    }
 
-  const userRole = user.data.role || [];
-  let allowed = false;
+    const userRole = user.data.role || [];
+    let allowed = false;
 
-  switch(path) {
+    switch (path) {
       case '/chef2':
-          allowed = userRole.includes('Chef departement');
-          break;
+        allowed = userRole.includes('Chef departement');
+        break;
       case '/assistant2':
-          allowed = userRole.includes('Assistant departement') || userRole.includes('Chef departement');
-          break;
+        allowed = userRole.includes('Assistant departement') || userRole.includes('Chef departement');
+        break;
       case '/declarant':
-          allowed = userRole.includes('Declarant') || userRole.includes('Chef departement');
-          break;
+        allowed = userRole.includes('Declarant') || userRole.includes('Chef departement');
+        break;
       case '/livreur':
-          allowed = userRole.includes('Livreur') || userRole.includes('Chef departement');
-          break;
+        allowed = userRole.includes('Livreur') || userRole.includes('Chef departement');
+        break;
       case '/poursuivant':
-          allowed = userRole.includes('Poursuivant') || userRole.includes('Chef departement');
-          break;
+        allowed = userRole.includes('Poursuivant') || userRole.includes('Chef departement');
+        break;
       default:
-          allowed = false;
-  }
+        allowed = false;
+    }
 
-  if (allowed) {
+    if (allowed) {
       navigate(path);
-  } else {
+    } else {
       Swal.fire({
-          icon: 'error',
-          title: 'Accès refusé',
-          text: 'Vous n\'êtes pas autorisé à accéder à cette page.',
+        icon: 'error',
+        title: 'Accès refusé',
+        text: 'Vous n\'êtes pas autorisé à accéder à cette page.',
       });
-  }
+    }
   };
+
+  const userRole = user.data?.role || [];
 
   return (
     <div id="page-container" className="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
@@ -110,57 +111,46 @@ const Departement2 = () => {
                 </a>
               </li>
               <li className="nav-main-heading">Departement opérations</li>
-              <li className="nav-main-item">
-                <a
-                  className="nav-main-link"
-                  href="#!"
-                  onClick={() => navigateTo('/chef2')}
-                >
-                  <i className="nav-main-link-icon si si-energy"></i>
-                  <span className="nav-main-link-name">Chef departement</span>
-                </a>
-              </li>
-              <li className="nav-main-item">
-                <a
-                  className="nav-main-link"
-                  href="#!"
-                  onClick={() => navigateTo('/assistant2')}
-                >
-                  <i className="nav-main-link-icon si si-energy"></i>
-                  <span className="nav-main-link-name">Assistant département</span>
-                </a>
-              </li>
-              <li className="nav-main-item">
-                <a
-                  className="nav-main-link"
-                  href="#!"
-                  onClick={() => navigateTo('/declarant')}
-                >
-                  <i className="nav-main-link-icon si si-energy"></i>
-                  <span className="nav-main-link-name">Déclarant</span>
-                </a>
-              </li>
-              <li className="nav-main-item">
-                <a
-                  className="nav-main-link"
-                  href="#!"
-                  onClick={() => navigateTo('/livreur')}
-                >
-                  <i className="nav-main-link-icon si si-energy"></i>
-                  <span className="nav-main-link-name">Livreur</span>
-                </a>
-              </li>
-              
-              <li className="nav-main-item">
-                <a
-                  className="nav-main-link"
-                  href="#!"
-                  onClick={() => navigateTo('/poursuivant')}
-                >
-                  <i className="nav-main-link-icon si si-energy"></i>
-                  <span className="nav-main-link-name">Poursuivant</span>
-                </a>
-              </li>
+              {userRole.includes('Chef departement') && (
+                <li className="nav-main-item">
+                  <a className="nav-main-link" href="#!" onClick={() => navigateTo('/chef2')}>
+                    <i className="nav-main-link-icon si si-energy"></i>
+                    <span className="nav-main-link-name">Chef departement</span>
+                  </a>
+                </li>
+              )}
+              {(userRole.includes('Assistant departement') || userRole.includes('Chef departement')) && (
+                <li className="nav-main-item">
+                  <a className="nav-main-link" href="#!" onClick={() => navigateTo('/assistant2')}>
+                    <i className="nav-main-link-icon si si-energy"></i>
+                    <span className="nav-main-link-name">Assistant département</span>
+                  </a>
+                </li>
+              )}
+              {(userRole.includes('Declarant') || userRole.includes('Chef departement')) && (
+                <li className="nav-main-item">
+                  <a className="nav-main-link" href="#!" onClick={() => navigateTo('/declarant')}>
+                    <i className="nav-main-link-icon si si-energy"></i>
+                    <span className="nav-main-link-name">Déclarant</span>
+                  </a>
+                </li>
+              )}
+              {(userRole.includes('Livreur') || userRole.includes('Chef departement')) && (
+                <li className="nav-main-item">
+                  <a className="nav-main-link" href="#!" onClick={() => navigateTo('/livreur')}>
+                    <i className="nav-main-link-icon si si-energy"></i>
+                    <span className="nav-main-link-name">Livreur</span>
+                  </a>
+                </li>
+              )}
+              {(userRole.includes('Poursuivant') || userRole.includes('Chef departement')) && (
+                <li className="nav-main-item">
+                  <a className="nav-main-link" href="#!" onClick={() => navigateTo('/poursuivant')}>
+                    <i className="nav-main-link-icon si si-energy"></i>
+                    <span className="nav-main-link-name">Poursuivant</span>
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </div>
@@ -212,98 +202,95 @@ const Departement2 = () => {
           </div>
         </div>
         <div className="custom-content">
-  <div className="custom-row">
-    <div className="custom-col">
-      <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-dusk"  onClick={() => navigateTo('/chef2')}>
-        <div className="custom-block-content custom-block-content-full custom-text-center" onMouseEnter={(e) => e.currentTarget.style.color = '#fff'} onMouseLeave={(e) => e.currentTarget.style.color = '#000'}>
-          <div className="custom-item custom-item-circle custom-bg-black-25">
-            <i className="fa fa-users custom-text-white"></i>
+          <div className="custom-row">
+            {userRole.includes('Chef departement') && (
+              <div className="custom-col">
+                <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-dusk" onClick={() => navigateTo('/chef2')}>
+                  <div className="custom-block-content custom-block-content-full custom-text-center" onMouseEnter={(e) => e.currentTarget.style.color = '#fff'} onMouseLeave={(e) => e.currentTarget.style.color = '#000'}>
+                    <div className="custom-item custom-item-circle custom-bg-black-25">
+                      <i className="fa fa-users custom-text-white"></i>
+                    </div>
+                    <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
+                      Chef département
+                    </p>
+                    <p className="custom-text-white-75">
+                      Cliquez pour gérer les chefs de département
+                    </p>
+                  </div>
+                </a>
+              </div>
+            )}
+            {(userRole.includes('Assistant departement') || userRole.includes('Chef departement')) && (
+              <div className="custom-col">
+                <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-dusk" onClick={() => navigateTo('/assistant2')}>
+                  <div className="custom-block-content custom-block-content-full custom-text-center" onMouseEnter={(e) => e.currentTarget.style.color = '#fff'} onMouseLeave={(e) => e.currentTarget.style.color = '#000'}>
+                    <div className="custom-item custom-item-circle custom-bg-black-25">
+                      <i className="fa fa-users custom-text-white"></i>
+                    </div>
+                    <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
+                      Assistant département
+                    </p>
+                    <p className="custom-text-white-75">
+                      Cliquez pour gérer les assistants de département
+                    </p>
+                  </div>
+                </a>
+              </div>
+            )}
+            {(userRole.includes('Declarant') || userRole.includes('Chef departement')) && (
+              <div className="custom-col">
+                <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-dusk" onClick={() => navigateTo('/declarant')}>
+                  <div className="custom-block-content custom-block-content-full custom-text-center" onMouseEnter={(e) => e.currentTarget.style.color = '#fff'} onMouseLeave={(e) => e.currentTarget.style.color = '#000'}>
+                    <div className="custom-item custom-item-circle custom-bg-black-25">
+                      <i className="fa fa-users custom-text-white"></i>
+                    </div>
+                    <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
+                      Déclarant
+                    </p>
+                    <p className="custom-text-white-75">
+                      Cliquez pour gérer les déclarants
+                    </p>
+                  </div>
+                </a>
+              </div>
+            )}
+            {(userRole.includes('Livreur') || userRole.includes('Chef departement')) && (
+              <div className="custom-col">
+                <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-dusk" onClick={() => navigateTo('/livreur')}>
+                  <div className="custom-block-content custom-block-content-full custom-text-center" onMouseEnter={(e) => e.currentTarget.style.color = '#fff'} onMouseLeave={(e) => e.currentTarget.style.color = '#000'}>
+                    <div className="custom-item custom-item-circle custom-bg-black-25">
+                      <i className="fa fa-users custom-text-white"></i>
+                    </div>
+                    <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
+                      Livreur
+                    </p>
+                    <p className="custom-text-white-75">
+                      Cliquez pour gérer les livreurs
+                    </p>
+                  </div>
+                </a>
+              </div>
+            )}
+            {(userRole.includes('Poursuivant') || userRole.includes('Chef departement')) && (
+              <div className="custom-col">
+                <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-dusk" onClick={() => navigateTo('/poursuivant')}>
+                  <div className="custom-block-content custom-block-content-full custom-text-center" onMouseEnter={(e) => e.currentTarget.style.color = '#fff'} onMouseLeave={(e) => e.currentTarget.style.color = '#000'}>
+                    <div className="custom-item custom-item-circle custom-bg-black-25">
+                      <i className="fa fa-users custom-text-white"></i>
+                    </div>
+                    <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
+                      Poursuivant
+                    </p>
+                    <p className="custom-text-white-75">
+                      Cliquez pour gérer les poursuivants
+                    </p>
+                  </div>
+                </a>
+              </div>
+            )}
           </div>
-          <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
-            Chef département
-          </p>
-          <p className="custom-text-white-75 custom-mb-0">
-            Département opérations
-          </p>
         </div>
-      </a>
-    </div>
-    <div className="custom-col">
-      <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-sea"  onClick={() => navigateTo('/assistant2')}>
-        <div className="custom-block-content custom-block-content-full custom-text-center">
-          <div className="custom-item custom-item-circle custom-bg-black-25">
-            <i className="fa fa-handshake custom-text-white"></i>
-          </div>
-          <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
-            Assistant département
-          </p>
-          <p className="custom-text-white-75 custom-mb-0">
-            Sous la responsabilité du chef de département
-          </p>
-        </div>
-      </a>
-    </div>
-    <div className="custom-col">
-      <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-fruit" href="javascript:void(0)" onClick={() => navigateTo('/declarant')}>
-        <div className="custom-block-content custom-block-content-full custom-text-center">
-          <div className="custom-item custom-item-circle custom-bg-black-25">
-            <i className="fa fa-chart-bar custom-text-white"></i>
-          </div>
-          <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
-            Déclarant
-          </p>
-          <p className="custom-text-white-75 custom-mb-0">
-            Sous la responsabilité du chef de département
-          </p>
-        </div>
-      </a>
-    </div>
-    <div className="custom-col">
-      <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-sea"  onClick={() => navigateTo('/livreur')}>
-        <div className="custom-block-content custom-block-content-full custom-text-center">
-          <div className="custom-item custom-item-circle custom-bg-black-25">
-            <i className="fa fa-handshake custom-text-white"></i>
-          </div>
-          <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
-            Livreur
-          </p>
-          <p className="custom-text-white-75 custom-mb-0">
-            Sous la responsabilité du chef de département
-          </p>
-        </div>
-      </a>
-    </div>
-    <div className="custom-col">
-      <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-sea"  onClick={() => navigateTo('/poursuivant')}>
-        <div className="custom-block-content custom-block-content-full custom-text-center">
-          <div className="custom-item custom-item-circle custom-bg-black-25">
-            <i className="fa fa-handshake custom-text-white"></i>
-          </div>
-          <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
-            Poursuivant
-          </p>
-          <p className="custom-text-white-75 custom-mb-0">
-            Sous la responsabilité du chef de département
-          </p>
-        </div>
-      </a>
-    </div>
-  </div>
-</div>
-
-
       </main>
-
-      <footer id="page-footer" className="bg-body-light">
-        <div className="content py-3">
-          <div className="row fs-sm">
-            <div className="col-sm-6 order-sm-1 text-center text-sm-start">
-              <a className="fw-semibold" href="https://1.envato.market/ydb" target="_blank" rel="noreferrer">Transit master</a> &copy; <span data-toggle="year-copy"></span>
-            </div>
-            
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
