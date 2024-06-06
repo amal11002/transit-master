@@ -184,7 +184,13 @@ button.add {
     margin-top: 0;
 }
 
+.modal-content form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .form-group {
+    width: 30%; /* Changer la largeur selon vos besoins */
     margin-bottom: 15px;
 }
 
@@ -198,10 +204,12 @@ button.add {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
+    margin-right: 50px;
 }
 
 .form-group textarea {
     resize: vertical;
+    padding: 10px;
 }
 
 .form-actions {
@@ -226,3 +234,5 @@ button.add {
 .close-modal:hover {
     color: #ff0000;
 }
+
+

@@ -16,6 +16,7 @@ import Files from './components/Files'; // Assurez-vous que le chemin est correc
 
 import Dossier from './components/pages/Dossier'; // Import correct pour le composant Dossier
 import Commercial from './commercial.js';  // Corrected path
+import Assistant1 from './assistant1.js';  // Corrected path
 
 
 import './App.css';  // Assuming the styles are in App.css
@@ -38,6 +39,7 @@ const App = () => {
           <Route path="/departement3" element={<Departement3 />} />
           <Route path="/register" element={<Register />} />
           <Route path="/commercial" element={<Commercial />} />
+          <Route path="/assistant1" element={<Assistant1 />} />
           {/* <Route path="/register" element={<ProtectedRoute component={Register} />} />
           
           {/* You can add other routes here */}

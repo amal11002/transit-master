@@ -162,7 +162,7 @@ const DossierComponent = () => {
             {modalVisible && (
                 <div className="modal">
                     <div className="modal-content">
-                    <button className="close-modal" onClick={() => setViewModalVisible(false)}>
+                    <button className="close-modal" onClick={() => setModalVisible(false)}>
                 <i className="fa fa-times"></i>
             </button>
                         <h2>Modifier Dossier</h2>
@@ -307,7 +307,7 @@ const DossierComponent = () => {
                                     </div>
                                 </>
                             )}
-                            <button type="button" onClick={() => setModalVisible(false)}>Annuler</button>
+                            {/* <button type="button" onClick={() => setModalVisible(false)}>Annuler</button> */}
                         </form>
                     </div>
                 </div>
