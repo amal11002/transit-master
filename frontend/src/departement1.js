@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import './styled.css';
 import ProfileDropdown from './ProfileDropdown';
+import ListDossier from './components/ListDossier';
 
 const Departement1 = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -109,6 +110,9 @@ const Departement1 = () => {
                   </a>
                 </li>
               )}
+              
+
+              
               {(user.data?.role?.includes('Assistant departement') || user.data?.role?.includes('Chef departement')) && (
                 <li className="nav-main-item">
                   <a className="nav-main-link" href="#!" onClick={() => navigateTo('/assistant1')}>
@@ -175,7 +179,7 @@ const Departement1 = () => {
         </div>
         <div className="custom-content">
           <div className="custom-row">
-            {user.data?.role?.includes('Chef departement') && (
+            {/* {user.data?.role?.includes('Chef departement') && (
               <div className="custom-col">
                 <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-dusk" onClick={() => navigateTo('/chef1')}>
                   <div className="custom-block-content custom-block-content-full custom-text-center" onMouseEnter={(e) => e.currentTarget.style.color = '#fff'} onMouseLeave={(e) => e.currentTarget.style.color = '#000'}>
@@ -191,8 +195,8 @@ const Departement1 = () => {
                   </div>
                 </a>
               </div>
-            )}
-            {(user.data?.role?.includes('Assistant departement') || user.data?.role?.includes('Chef departement')) && (
+            )} */}
+            {user.data?.role?.includes('Assistant departement')  && (
               <div className="custom-col">
                 <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-sea" onClick={() => navigateTo('/assistant1')}>
                   <div className="custom-block-content custom-block-content-full custom-text-center">
@@ -209,7 +213,7 @@ const Departement1 = () => {
                 </a>
               </div>
             )}
-            {(user.data?.role?.includes('Commercial') || user.data?.role?.includes('Chef departement')) && (
+            {user.data?.role?.includes('Commercial')  && (
               <div className="custom-col">
                 <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-fruit" onClick={() => navigateTo('/commercial')}>
                   <div className="custom-block-content custom-block-content-full custom-text-center">
@@ -226,7 +230,15 @@ const Departement1 = () => {
                 </a>
               </div>
             )}
+
           </div>
+          {user.data?.role?.includes('Chef departement') && (
+ 
+    <div className="dossier">
+      <ListDossier />
+    </div>
+
+)}
         </div>
       </main>
     </div>

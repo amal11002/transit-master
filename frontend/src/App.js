@@ -13,8 +13,9 @@ import MyFile from './components/pages/MyFile'; // Assurez-vous que le chemin es
 import ListDossier from './components/ListDossier';
 import Myform from './components/MyForm'
 import Files from './components/Files'; // Assurez-vous que le chemin est correct
-import Sidebar from './components/sidebar'; // Assurez-vous que Sidebar.js existe
+
 import Dossier from './components/pages/Dossier'; // Import correct pour le composant Dossier
+import Commercial from './commercial.js';  // Corrected path
 
 
 import './App.css';  // Assuming the styles are in App.css
@@ -29,15 +30,16 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/departement1" element={<Departement1 />} />
-          <Route path="/" element={<Home />} />
+         
         <Route path="/Dossier" element={<Dossier />} />
         <Route path="/fichier" element={<MyFile />} />
         <Route path="/lesdossier" element={<ListDossier />} />
           <Route path="/departement2" element={<Departement2 />} />
           <Route path="/departement3" element={<Departement3 />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/commercial" element={<Commercial />} />
           {/* <Route path="/register" element={<ProtectedRoute component={Register} />} />
-          <Route path="/home" element={<ProtectedRoute component={Home} />} /> */}
+          
           {/* You can add other routes here */}
         </Routes>
       </BrowserRouter>

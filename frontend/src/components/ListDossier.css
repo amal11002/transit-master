@@ -5,7 +5,7 @@ table {
     width: 86%;
     border-collapse: collapse;
     margin: 10px ;
-    margin-left: 190px;
+    margin-left: 80px;
     font-size: 18px;
     text-align: left;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -14,7 +14,7 @@ table {
 }
 
 thead tr {
-    background-color: #009879;
+    background-color: #293145;
     color: #ffffff;
     text-align: left;
     font-weight: bold;
@@ -46,10 +46,10 @@ button {
     padding-top: 2px;
 margin-bottom: 2px;
 font-weight: bold;    
-    border: 2px solid blueviolet;
+    border: 2px solid ;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #7ebbf0;
+    /* background-color: #7ebbf0; */
   
 }
 
@@ -58,13 +58,13 @@ button:hover {
 }
 
 .view {
-    background-color: #3498db;
-    color: #ffffff;
+    /* background-color: #3498db; */
+    color: black;
     height: 50px;
     width:50px;
 }
 .create{
-    background-color: #a2f41e;
+    background-color: #2356d7;
     color: #ffffff;
     height: 50px;
     width:50px;
@@ -73,16 +73,16 @@ button:hover {
 }
 
 button.edit {
-    background-color: #2ecc71;
-    color: #ffffff;
+    /* background-color: #139a52; */
+    color: BLACK;
     height: 50px;
     width:50px;
     margin-left: 4px;
 }
 
 button.delete {
-    background-color: #e6210b;
-    color: #ffffff;
+    /* background-color: #d61f47; */
+    color: black;
     height: 50px;
     width:50px;
     margin-left: 4px;
@@ -97,26 +97,31 @@ button.add {
 }
 
 /* Style pour les modales */
-.modal {
+/* .modal {
 
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     transform: translate(-50%, -50%);
     background-color: #ffffff;
-    padding: 20px;
+    padding: 50px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     border-radius: 8px;
-    width: 50%;
-}
+    padding-top: 40px;
+    width: 40%;
+    
+} */
 
 .modal h2 {
-    margin-top: 0;
+    margin-top: 10px;
 }
 
 .modal form div {
-    margin-bottom: 15px;
+    margin-top: 50px;
+    margin-bottom: 0px;
 }
 
 .modal form label {
@@ -155,15 +160,17 @@ button.add {
 }
 .modal {
     position: fixed;
-    top: 300px;
-    left: 700px;
+    top: 0;
+    left: 0;
     right: 0;
     bottom: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
 }
+
 
 .modal-content {
     background-color: white;
@@ -206,3 +213,16 @@ button.add {
     margin-left: 10px;
 }
 
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: #ff0000;
+}

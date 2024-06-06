@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ListDossier.css';
+import Swal from 'sweetalert2';
 import { FaEye, FaEdit, FaTrashAlt, FaPlus } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
@@ -40,7 +41,7 @@ const DossierComponent = () => {
     };
 
     const fetchDossiers = async () => {
-        const response = await fetch('http://localhost:8000/api/dossiers');
+        const response = await fetch('http://localhost:8080/api/dossiers');
         const data = await response.json();
         setDossiers(data);
     };
@@ -54,7 +55,7 @@ const DossierComponent = () => {
 
     const submitForm = async (e) => {
         e.preventDefault();
-        const response = await fetch('http://localhost:8000/api/update_dossier', {
+        const response = await fetch('http://localhost:8080/api/update_dossier', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -70,18 +71,39 @@ const DossierComponent = () => {
     };
 
     const deleteDossier = async (id) => {
-        const response = await fetch(`http://localhost:8000/api/dossiers/${id}`, {
-            method: 'DELETE',
+        // Afficher la SweetAlert pour confirmer la suppression
+        Swal.fire({
+            title: 'Êtes-vous sûr?',
+            text: 'Vous ne pourrez pas récupérer ce dossier!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Oui, supprimer!',
+            cancelButtonText: 'Annuler'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                // Si l'utilisateur a confirmé la suppression
+                const response = await fetch(`http://localhost:8080/api/dossiers/${id}`, {
+                    method: 'DELETE',
+                });
+                if (response.ok) {
+                    fetchDossiers();
+                    Swal.fire(
+                        'Supprimé!',
+                        'Le dossier a été supprimé avec succès.',
+                        'success'
+                    );
+                } else {
+                    console.error('Failed to delete dossier');
+                }
+            }
         });
-        if (response.ok) {
-            fetchDossiers();
-        } else {
-            console.error('Failed to delete dossier');
-        }
     };
+    
 
     const viewDossier = async (id) => {
-        const response = await fetch(`http://localhost:8000/api/dossiers/${id}`);
+        const response = await fetch(`http://localhost:8080/api/dossiers/${id}`);
         const data = await response.json();
         setSelectedDossier(data);
         setViewModalVisible(true);
@@ -108,7 +130,7 @@ const DossierComponent = () => {
                 <thead>
                     <tr>
                         <th>LTA/BL</th>
-                        <th>Client</th>
+                        <th>Provenance</th>
                         <th>Expéditeur</th>
                         <th>Date d'ouverture</th>
                         <th>Actions</th>
@@ -140,6 +162,9 @@ const DossierComponent = () => {
             {modalVisible && (
                 <div className="modal">
                     <div className="modal-content">
+                    <button className="close-modal" onClick={() => setViewModalVisible(false)}>
+                <i className="fa fa-times"></i>
+            </button>
                         <h2>Modifier Dossier</h2>
                         <form onSubmit={submitForm}>
                             {currentPage === 1 && (
@@ -291,6 +316,9 @@ const DossierComponent = () => {
             {viewModalVisible && (
                 <div className="modal">
                     <div className="modal-content">
+                    <button className="close-modal" onClick={() => setViewModalVisible(false)}>
+                <i className="fa fa-times"></i>
+            </button>
                         <h2>Détails du Dossier</h2>
                         {currentPage === 1 && (
                             <>
