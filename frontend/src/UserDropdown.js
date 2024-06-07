@@ -42,7 +42,7 @@ const UserDropdown = ({ user }) => {
                     return;
                 }
 
-                fetch('http://localhost:8080/api/logout', {
+                fetch('http://localhost:8000/api/logout', {
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + token,

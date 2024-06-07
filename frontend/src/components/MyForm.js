@@ -21,7 +21,7 @@ const MyForm = () => {
     description: '',            
     date_estimative_darrivee: '',
     date_reele_darrivee: '',     
- 
+    cree_par: ''
   });
 
   const navigate = useNavigate();
@@ -68,19 +68,19 @@ const MyForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    console.log('Form values before submission:', formValues);
+
     fetch('http://localhost:8000/api/dossiers', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
-      body: JSON.stringify({
-        ...formValues,
-        // Mettez ici la logique pour récupérer l'ID de l'utilisateur courant depuis l'authentification
-      }),
+      body: JSON.stringify(formValues),
     })
       .then(response => {
         if (!response.ok) {
-          throw new Error('Erreur lors de la soumission du formulaire');
+          return response.json().then(err => { throw err; });
         }
         return response.json();
       })
@@ -110,163 +110,167 @@ const MyForm = () => {
   };
 
   return (
-   
     <div className="form-container">
       <center>
-      <div className="styled-paper">
-        <h2 className="form-title">Étape {step}</h2>
-        <form onSubmit={step === 3 ? handleSubmit : handleNextStep}>
-          {step === 1 && (
-            <>
-              <center>Exportateur</center>
-              <input
-                type="text"
-                name="exportateur"
-                value={formValues.exportateur}
-                onChange={handleChange}
-                className="form-field"
-              />
-              <center>Destinataire</center>
-              <input
-                type="text"
-                name="destinataire"
-                value={formValues.destinataire}
-                onChange={handleChange}
-                className="form-field"
-              />
-              <center>Régime client</center>
-              <input
-                type="text"
-                name="regime_client"
-                value={formValues.regime_client}
-                onChange={handleChange}
-                className="form-field"
-              />
-              <center>N° DR GLS</center>
-              <input
-                type="text"
-                name="num_dr_gls"
-                value={formValues.num_dr_gls}
-                onChange={handleChange}
-                className="form-field"
-              />
-              <center>Provenance</center>
-              <input
-                type="text"
-                name="provenance"
-                value={formValues.provenance}
-                onChange={handleChange}
-                className="form-field"
-              />
-              <button type="submit" className="submit-button">Suivant</button>
-            </>
-          )}
-          {step === 2 && (
-            <>
-              <center>Mode de transport</center>
-              <select
-                name="mode_transport"
-                value={formValues.mode_transport}
-                onChange={handleChange}
-                className="form-field"
-              >
-                <option value="Maritime">Maritime</option>
-                <option value="Aérien">Aérien</option>
-              </select>
-              <center>N° LTA /BL</center>
-              <input
-                type="text"
-                name="num_lta_bl"
-                value={formValues.num_lta_bl}
-                onChange={handleChange}
-                className="form-field"
-              />
-              <center>Nombre Total de Colis</center>
-              <input
-                type="text"
-                name="nombre_total_colis"
-                value={formValues.nombre_total_colis}
-                onChange={handleChange}
-                className="form-field"
-              />
-              <center>Poids Total Brut en Kg</center>
-              <input
-                type="text"
-                name="poids_total_brut"
-                value={formValues.poids_total_brut}
-                onChange={handleChange}
-                className="form-field"
-              />
-              <center>Poids Total Net en Kg</center>
-              <input
-                type="text"
-                name="poids_total_net"
-                value={formValues.poids_total_net}
-                onChange={handleChange}
-                className="form-field"
-              />
-              <button
-                onClick={handlePreviousStep}
-                className="precedent-button"
-              >
-                Précédent
-              </button>
-              <button
-                type="submit"
-                className="submit-button"
-              >
-                Suivant
-              </button>
-            </>
-          )}
-          {step === 3 && (
-            <>
-              <center>Volume Total en m<sup>3</sup></center>
-              <input
-                type="text"
-                name="volume_total"
-                value={formValues.volume_total}
-                onChange={handleChange}
-                className="form-field"
-              />
-              <center>Date Estimative d'Arrivée</center>
-              <input
-                type="date"
-                name="date_estimative_darrivee"
-                value={formValues.date_estimative_darrivee}
-                onChange={handleChange}
-                className="form-field"
-              />
-              <center>Date Réelle d'Arrivée</center>
-              <input
-                type="date"
-                name="date_reele_darrivee"
-                value={formValues.date_reele_darrivee}
-                onChange={handleChange}
-                className="form-field"
-              />
-
-              <button
-                onClick={handlePreviousStep}
-                className="precedent-button"
-              >
-                Précédent
-              </button>
-              <button
-                type="submit"
-                className="register-button"
-              >
-                Enregistrer
-              </button>
-            </>
-          )}
-        </form>
+        <div className="styled-paper">
+          <h2 className="form-title">Étape {step}</h2>
+          <form onSubmit={step === 3 ? handleSubmit : handleNextStep}>
+            {step === 1 && (
+              <>
+                <center>Exportateur</center>
+                <input
+                  type="text"
+                  name="exportateur"
+                  value={formValues.exportateur}
+                  onChange={handleChange}
+                  className="form-field"
+                />
+                <center>Destinataire</center>
+                <input
+                  type="text"
+                  name="destinataire"
+                  value={formValues.destinataire}
+                  onChange={handleChange}
+                  className="form-field"
+                />
+                <center>Régime client</center>
+                <input
+                  type="text"
+                  name="regime_client"
+                  value={formValues.regime_client}
+                  onChange={handleChange}
+                  className="form-field"
+                />
+                <center>N° DR GLS</center>
+                <input
+                  type="text"
+                  name="num_dr_gls"
+                  value={formValues.num_dr_gls}
+                  onChange={handleChange}
+                  className="form-field"
+                />
+                <center>Provenance</center>
+                <input
+                  type="text"
+                  name="provenance"
+                  value={formValues.provenance}
+                  onChange={handleChange}
+                  className="form-field"
+                />
+                <button type="submit" className="submit-button">Suivant</button>
+              </>
+            )}
+            {step === 2 && (
+              <>
+                <center>Mode de transport</center>
+                <select
+                  name="mode_transport"
+                  value={formValues.mode_transport}
+                  onChange={handleChange}
+                  className="form-field"
+                >
+                  <option value="Maritime">Maritime</option>
+                  <option value="Aérien">Aérien</option>
+                </select>
+                <center>N° LTA /BL</center>
+                <input
+                  type="text"
+                  name="num_lta_bl"
+                  value={formValues.num_lta_bl}
+                  onChange={handleChange}
+                  className="form-field"
+                  />
+                  <center>Nombre Total de Colis</center>
+                  <input
+                    type="text"
+                    name="nombre_total_colis"
+                    value={formValues.nombre_total_colis}
+                    onChange={handleChange}
+                    className="form-field"
+                  />
+                  <center>Poids Total Brut en Kg</center>
+                  <input
+                    type="text"
+                    name="poids_total_brut"
+                    value={formValues.poids_total_brut}
+                    onChange={handleChange}
+                    className="form-field"
+                  />
+                  <center>Poids Total Net en Kg</center>
+                  <input
+                    type="text"
+                    name="poids_total_net"
+                    value={formValues.poids_total_net}
+                    onChange={handleChange}
+                    className="form-field"
+                  />
+                  <button
+                    onClick={handlePreviousStep}
+                    className="precedent-button"
+                  >
+                    Précédent
+                  </button>
+                  <button
+                    type="submit"
+                    className="submit-button"
+                  >
+                    Suivant
+                  </button>
+                </>
+              )}
+              {step === 3 && (
+                <>
+                  <center>Volume Total en m<sup>3</sup></center>
+                  <input
+                    type="text"
+                    name="volume_total"
+                    value={formValues.volume_total}
+                    onChange={handleChange}
+                    className="form-field"
+                  />
+                  <center>Date Estimative d'Arrivée</center>
+                  <input
+                    type="date"
+                    name="date_estimative_darrivee"
+                    value={formValues.date_estimative_darrivee}
+                    onChange={handleChange}
+                    className="form-field"
+                  />
+                  <center>Date Réelle d'Arrivée</center>
+                  <input
+                    type="date"
+                    name="date_reele_darrivee"
+                    value={formValues.date_reele_darrivee}
+                    onChange={handleChange}
+                    className="form-field"
+                  />
+                  <center>Créé Par</center>
+                  <input
+                    type="text"
+                    name="cree_par"
+                    value={formValues.cree_par}
+                    onChange={handleChange}
+                    className="form-field"
+                  />
+                  <button
+                    onClick={handlePreviousStep}
+                    className="precedent-button"
+                  >
+                    Précédent
+                  </button>
+                  <button
+                    type="submit"
+                    className="register-button"
+                  >
+                    Enregistrer
+                  </button>
+                </>
+              )}
+            </form>
+          </div>
+        </center>
       </div>
-      </center>
-    </div>
-   
-  );
+    );
+  };
   
-};
-
-export default MyForm;
+  export default MyForm;
