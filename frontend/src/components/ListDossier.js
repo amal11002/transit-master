@@ -41,7 +41,7 @@ const DossierComponent = () => {
     };
 
     const fetchDossiers = async () => {
-        const response = await fetch('http://localhost:8080/api/dossiers');
+        const response = await fetch('http://localhost:8000/api/dossiers');
         const data = await response.json();
         setDossiers(data);
     };
@@ -55,7 +55,7 @@ const DossierComponent = () => {
 
     const submitForm = async (e) => {
         e.preventDefault();
-        const response = await fetch('http://localhost:8080/api/update_dossier', {
+        const response = await fetch('http://localhost:8000/api/update_dossier', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ const DossierComponent = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 // Si l'utilisateur a confirmé la suppression
-                const response = await fetch(`http://localhost:8080/api/dossiers/${id}`, {
+                const response = await fetch(`http://localhost:8000/api/dossiers/${id}`, {
                     method: 'DELETE',
                 });
                 if (response.ok) {
@@ -103,7 +103,7 @@ const DossierComponent = () => {
     
 
     const viewDossier = async (id) => {
-        const response = await fetch(`http://localhost:8080/api/dossiers/${id}`);
+        const response = await fetch(`http://localhost:8000/api/dossiers/${id}`);
         const data = await response.json();
         setSelectedDossier(data);
         setViewModalVisible(true);

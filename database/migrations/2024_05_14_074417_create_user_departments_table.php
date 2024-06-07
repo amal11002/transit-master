@@ -12,9 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_departments', function (Blueprint $table) {
+            // Ajouter les colonnes user_id et departement_id
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('departement_id');
+
+            // Ajouter les clés étrangères
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-           $table->foreign('departement_id')->references('id_departement')->on('departement')->onDelete('cascade');
-           $table->primary(['user_id', 'departement_id']);
+            $table->foreign('departement_id')->references('id_departement')->on('departement')->onDelete('cascade');
+
+            // Définir la clé primaire composite
+            $table->primary(['user_id', 'departement_id']);
         });
     }
 

@@ -5,7 +5,7 @@ import './style.css';
 import UserDropdown from './UserDropdown';
 
 const reloadUsers = () => {
-    fetch('http://localhost:8080/api/users', {
+    fetch('http://localhost:8000/api/users', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + sessionStorage.setItem('token'),
@@ -67,7 +67,7 @@ const Dashboard = () => {
             return;
         }
 
-        fetch('http://localhost:8080/api/verify-token', {
+        fetch('http://localhost:8000/api/verify-token', {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token,
@@ -93,7 +93,7 @@ const Dashboard = () => {
                 return;
             }
 
-            fetch(`http://localhost:8080/api/users/${userId}`, {
+            fetch(`http://localhost:8000/api/users/${userId}`, {
                 headers: {
                     'Authorization': 'Bearer ' + token,
                 }
@@ -109,7 +109,7 @@ const Dashboard = () => {
             })
             .catch(error => console.error('Error:', error));
 
-            fetch('http://localhost:8080/api/users', {
+            fetch('http://localhost:8000/api/users', {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + token,
@@ -147,7 +147,7 @@ const Dashboard = () => {
                     return;
                 }
 
-                fetch('http://localhost:8080/api/logout', {
+                fetch('http://localhost:8000/api/logout', {
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + token,
@@ -193,7 +193,7 @@ const Dashboard = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:8080/api/users/${userId}`, {
+                fetch(`http://localhost:8000/api/users/${userId}`, {
                     method: 'DELETE',
                     headers: {
                         'Authorization': 'Bearer ' + sessionStorage.getItem('token')
@@ -533,7 +533,7 @@ const RegistrationForm = ({ toggleRegistrationForm }) => {
             departement_ids: [parseInt(formData.department)], // Ensure this is an integer
         };
 
-        fetch('http://localhost:8080/api/inscription', {
+        fetch('http://localhost:8000/api/inscription', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -887,7 +887,7 @@ const EditForm = ({ user, departments, roles, updateUser, onClose }) => {
             email: email
         };
     
-        fetch(`http://localhost:8080/api/users/${user.id}`, {
+        fetch(`http://localhost:8000/api/users/${user.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -908,7 +908,7 @@ const EditForm = ({ user, departments, roles, updateUser, onClose }) => {
                     const updatedDepartmentData = {
                         departement_ids: [department]
                     };
-                    fetch(`http://localhost:8080/api/users/${user.id}/update-departement`, {
+                    fetch(`http://localhost:8000/api/users/${user.id}/update-departement`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
@@ -937,7 +937,7 @@ const EditForm = ({ user, departments, roles, updateUser, onClose }) => {
                     const updatedRoleData = {
                         role_ids: roleIds
                     };
-                    fetch(`http://localhost:8080/api/users/${user.id}/update-role`, {
+                    fetch(`http://localhost:8000/api/users/${user.id}/update-role`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',

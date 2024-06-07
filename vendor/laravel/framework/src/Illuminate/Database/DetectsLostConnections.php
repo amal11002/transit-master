@@ -19,6 +19,7 @@ trait DetectsLostConnections
 
         return Str::contains($message, [
             'server has gone away',
+            'Server has gone away',
             'no connection to the server',
             'Lost connection',
             'is dead or not enabled',
@@ -73,6 +74,8 @@ trait DetectsLostConnections
             'SQLSTATE[HY000]: General error: 3989',
             'went away',
             'No such file or directory',
+            'server is shutting down',
+            'failed to connect to',
         ]);
     }
 }

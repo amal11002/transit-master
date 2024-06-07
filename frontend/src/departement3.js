@@ -24,7 +24,7 @@ const Departement3 = () => {
       }
 
       try {
-        const response = await fetch(`http://localhost:8080/api/users/${userId}`, {
+        const response = await fetch(`http://localhost:8000/api/users/${userId}`, {
           headers: {
             'Authorization': 'Bearer ' + token,
           }

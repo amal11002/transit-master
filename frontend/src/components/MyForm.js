@@ -69,7 +69,7 @@ const MyForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:8080/api/dossiers', {
+    fetch('http://localhost:8000/api/dossiers', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
