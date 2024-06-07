@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -9,7 +10,7 @@ class CreateColisTable extends Migration
     {
         Schema::create('colis', function (Blueprint $table) {
             $table->id('id_colis');
-            $table->string('numero_colis')->unique();
+            $table->string('numero_colis', 25)->unique(); // Définir une longueur maximale de 255 caractères
             $table->unsignedBigInteger('id_dossier');
             $table->unsignedBigInteger('id_expediteur')->nullable();
             $table->unsignedBigInteger('id_destinataire')->nullable();
@@ -23,7 +24,6 @@ class CreateColisTable extends Migration
             $table->foreign('id_agence_expedition')->references('id')->on('agences')->onDelete('set null');
             $table->foreign('id_agence_destination')->references('id')->on('agences')->onDelete('set null');
 
-            $table->unique('numero_colis');
             $table->index('id_dossier');
             $table->index('id_expediteur');
             $table->index('id_destinataire');

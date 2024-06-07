@@ -107,7 +107,7 @@ const Files = () => {
       formData.append('id_dossier', dossierId);
       formData.append('content', file.content); // Ajouter le contenu du fichier en base64
 
-      const response = await fetch('http://localhost:8080/api/fichiers', {
+      const response = await fetch('http://localhost:8000/api/fichiers', {
         method: 'POST',
         body: formData,
       });

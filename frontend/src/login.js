@@ -30,7 +30,7 @@ const Login = () => {
 
     setLoading(true);
 
-    fetch('http://localhost:8080/api/connexion', {
+    fetch('http://localhost:8000/api/connexion', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ const Login = () => {
 
         sessionStorage.setItem('userId', data.id);
       sessionStorage.setItem('token', data.token);
-        fetch('http://localhost:8080/api/check-admin', {
+        fetch('http://localhost:8000/api/check-admin', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${data.token}`,
@@ -65,7 +65,7 @@ const Login = () => {
           if (adminData.isAdmin) {
             window.location.href = '/dashboard';
           } else {
-            fetch('http://localhost:8080/api/check-roleanddepartement', {
+            fetch('http://localhost:8000/api/check-roleanddepartement', {
               method: 'GET',
               headers: {
                 'Authorization': `Bearer ${data.token}`,
