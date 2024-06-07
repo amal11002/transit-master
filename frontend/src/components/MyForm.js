@@ -33,6 +33,17 @@ const MyForm = () => {
     }
   }, []);
 
+  useEffect(() => {
+    // Set the userId from sessionStorage to cree_par
+    const userId = sessionStorage.getItem('userId');
+    if (userId) {
+      setFormValues(prevValues => ({
+        ...prevValues,
+        cree_par: userId
+      }));
+    }
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues(prevValues => ({
@@ -251,6 +262,7 @@ const MyForm = () => {
                     value={formValues.cree_par}
                     onChange={handleChange}
                     className="form-field"
+                    disabled // Désactiver pour éviter la modification
                   />
                   <button
                     onClick={handlePreviousStep}
