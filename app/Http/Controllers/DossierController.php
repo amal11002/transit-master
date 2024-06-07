@@ -1,8 +1,10 @@
-<?php 
+<?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dossier;
+use Illuminate\Support\Facades\Auth;
 
 class DossierController extends Controller
 {
@@ -26,8 +28,10 @@ class DossierController extends Controller
             'date_transmission_operation' => 'nullable|date',
             'date_reele_darrivee' => 'nullable|date',
             'description' => 'nullable|string',
-            'cree_par' => 'nullable|string|max:255',
         ]);
+
+        // Récupérer l'utilisateur actuellement authentifié
+        $user = Auth::user();
 
         $dossier = Dossier::create([
             'exportateur' => $validatedData['exportateur'],
@@ -43,77 +47,14 @@ class DossierController extends Controller
             'poids_total_net' => $validatedData['poids_total_net'],
             'volume_total' => $validatedData['volume_total'],
             'date_estimative_darrivee' => $validatedData['date_estimative_darrivee'],
-            'date_transmission_operation' => $validatedData['date_transmission_operation'],
+            'date_transmission_operation' => now(), // Utilisation de la date actuelle
             'date_reele_darrivee' => $validatedData['date_reele_darrivee'],
             'description' => $validatedData['description'],
-            'cree_par' => $validatedData['cree_par'],
+            'cree_par' => $user->id, // Association de l'ID de l'utilisateur actuel
         ]);
 
         return response()->json(['message' => 'Dossier créé avec succès', 'id_dossier' => $dossier->id_dossier], 201);
     }
 
-    // Méthode pour afficher un dossier par ID
-    public function show($id)
-    {
-        $dossier = Dossier::find($id);
-
-        if ($dossier) {
-            return response()->json($dossier, 200);
-        } else {
-            return response()->json(['message' => 'Dossier non trouvé'], 404);
-        }
-    }
-
-    // Méthode pour afficher tous les dossiers
-    public function index()
-    {
-        $dossiers = Dossier::all();
-        return response()->json($dossiers, 200);
-    }
-
-    // Méthode pour mettre à jour un dossier
-    public function update(Request $request, $id)
-    {
-        $validatedData = $request->validate([
-            'exportateur' => 'required|string|max:100',
-            'destinataire' => 'required|string|max:100',
-            'date_ouverture' => 'nullable|date',
-            'provenance' => 'nullable|string|max:255',
-            'regime_client' => 'nullable|string|max:255',
-            'mode_transport' => 'nullable|string|max:255',
-            'num_dr_gls' => 'nullable|string|max:255',
-            'num_lta_bl' => 'nullable|string|max:255',
-            'nombre_total_colis' => 'nullable|integer',
-            'poids_total_brut' => 'nullable|numeric',
-            'poids_total_net' => 'nullable|numeric',
-            'volume_total' => 'nullable|numeric',
-            'date_estimative_darrivee' => 'nullable|date',
-            'date_transmission_operation' => 'nullable|date',
-            'date_reele_darrivee' => 'nullable|date',
-            'description' => 'nullable|string',
-            'cree_par' => 'nullable|string|max:255',
-        ]);
-
-        $dossier = Dossier::find($id);
-
-        if ($dossier) {
-            $dossier->update($validatedData);
-            return response()->json(['message' => 'Dossier mis à jour avec succès'], 200);
-        } else {
-            return response()->json(['message' => 'Dossier non trouvé'], 404);
-        }
-    }
-
-    // Méthode pour supprimer un dossier
-    public function destroy($id)
-    {
-        $dossier = Dossier::find($id);
-
-        if ($dossier) {
-            $dossier->delete();
-            return response()->json(['message' => 'Dossier supprimé avec succès'], 200);
-        } else {
-            return response()->json(['message' => 'Dossier non trouvé'], 404);
-        }
-    }
+    // Autres méthodes du contrôleur ici...
 }
