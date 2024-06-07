@@ -61,32 +61,7 @@ const Departement1 = () => {
       return;
     }
 
-    const userRole = user.data?.role || [];
-    let allowed = false;
-
-    switch(path) {
-      case '/chef1':
-        allowed = userRole.includes('Chef departement');
-        break;
-      case '/assistant1':
-        allowed = userRole.includes('Assistant departement') || userRole.includes('Chef departement');
-        break;
-      case '/commercial':
-        allowed = userRole.includes('Commercial') || userRole.includes('Chef departement');
-        break;
-      default:
-        allowed = false;
-    }
-
-    if (allowed) {
-      navigate(path);
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Accès refusé',
-        text: 'Vous n\'êtes pas autorisé à accéder à cette page.',
-      });
-    }
+    navigate(path);
   };
 
   return (
@@ -102,33 +77,33 @@ const Departement1 = () => {
                 </a>
               </li>
               <li className="nav-main-heading">Departement commercial</li>
-              {user.data?.role?.includes('Chef departement') && (
+              {/* {user.data?.role?.includes('Chef departement') && ( */}
                 <li className="nav-main-item">
                   <a className="nav-main-link" href="#!" onClick={() => navigateTo('/chef1')}>
                     <i className="nav-main-link-icon si si-energy"></i>
                     <span className="nav-main-link-name">Chef departement</span>
                   </a>
                 </li>
-              )}
+              {/* )} */}
               
 
               
-              {(user.data?.role?.includes('Assistant departement') || user.data?.role?.includes('Chef departement')) && (
+              {/* {(user.data?.role?.includes('Assistant departement') || user.data?.role?.includes('Chef departement')) && ( */}
                 <li className="nav-main-item">
                   <a className="nav-main-link" href="#!" onClick={() => navigateTo('/assistant1')}>
                     <i className="nav-main-link-icon si si-energy"></i>
                     <span className="nav-main-link-name">Assistant département</span>
                   </a>
                 </li>
-              )}
-              {(user.data?.role?.includes('Commercial') || user.data?.role?.includes('Chef departement')) && (
+              {/* )} */}
+              {/* {(user.data?.role?.includes('Commercial') || user.data?.role?.includes('Chef departement')) && ( */}
                 <li className="nav-main-item">
                   <a className="nav-main-link" href="#!" onClick={() => navigateTo('/commercial')}>
                     <i className="nav-main-link-icon si si-energy"></i>
                     <span className="nav-main-link-name">Commercial</span>
                   </a>
                 </li>
-              )}
+              {/* )} */}
             </ul>
           </div>
         </div>
@@ -179,66 +154,15 @@ const Departement1 = () => {
         </div>
         <div className="custom-content">
           <div className="custom-row">
-            {/* {user.data?.role?.includes('Chef departement') && (
-              <div className="custom-col">
-                <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-dusk" onClick={() => navigateTo('/chef1')}>
-                  <div className="custom-block-content custom-block-content-full custom-text-center" onMouseEnter={(e) => e.currentTarget.style.color = '#fff'} onMouseLeave={(e) => e.currentTarget.style.color = '#000'}>
-                    <div className="custom-item custom-item-circle custom-bg-black-25">
-                      <i className="fa fa-users custom-text-white"></i>
-                    </div>
-                    <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
-                      Chef département
-                    </p>
-                    <p className="custom-text-white-75 custom-mb-0">
-                      Département commercial
-                    </p>
-                  </div>
-                </a>
-              </div>
-            )} */}
-            {user.data?.role?.includes('Assistant departement')  && (
-              <div className="custom-col">
-                <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-sea" onClick={() => navigateTo('/assistant1')}>
-                  <div className="custom-block-content custom-block-content-full custom-text-center">
-                    <div className="custom-item custom-item-circle custom-bg-black-25">
-                      <i className="fa fa-handshake custom-text-white"></i>
-                    </div>
-                    <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
-                      Assistant département
-                    </p>
-                    <p className="custom-text-white-75 custom-mb-0">
-                      Sous la responsabilité du chef de département
-                    </p>
-                  </div>
-                </a>
-              </div>
-            )}
-            {user.data?.role?.includes('Commercial')  && (
-              <div className="custom-col">
-                <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-fruit" onClick={() => navigateTo('/commercial')}>
-                  <div className="custom-block-content custom-block-content-full custom-text-center">
-                    <div className="custom-item custom-item-circle custom-bg-black-25">
-                      <i className="fa fa-chart-line custom-text-white"></i>
-                    </div>
-                    <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
-                      Commercial
-                    </p>
-                    <p className="custom-text-white-75 custom-mb-0">
-                      Chargé de la vente
-                    </p>
-                  </div>
-                </a>
-              </div>
-            )}
+           
 
           </div>
-          {user.data?.role?.includes('Chef departement') && (
+
  
     <div className="dossier">
       <ListDossier />
     </div>
 
-)}
         </div>
       </main>
     </div>
