@@ -1,0 +1,219 @@
+[33mcommit 7ba44d0759f6bd1259d045525ce561cacbbca6c8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Merge: f89f5bf1 60f61e00
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Fri Jun 7 13:21:52 2024 +0300
+
+    issues with merged files
+
+[33mcommit 60f61e00a031eb64df7a55b102cb62742b9e2d12[m
+Author: campuskader <campuskader321@gmailcom>
+Date:   Fri Jun 7 11:44:20 2024 +0000
+
+    modification du champs creer par
+
+[33mcommit f89f5bf1f73c3a3e8d08af724fe8f3af02b53d62[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Fri Jun 7 13:18:11 2024 +0300
+
+    departement commercial tout accessible sur la meme page
+
+[33mcommit e09e7e2f3cc9b39c306ae4fdddf87a5ee58bbbc0[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Thu Jun 6 15:32:00 2024 +0300
+
+    ajout page assistant commercial asssistant1
+
+[33mcommit 0287d298434db2b055bb0e8157c8b140c8b55514[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Thu Jun 6 15:00:29 2024 +0300
+
+    modification css listdossier
+
+[33mcommit 21fb2405a0186afcca6447df48c3fc61813f0862[m
+Merge: 75628ec4 d09d1614
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Wed Jun 5 17:28:36 2024 +0300
+
+    Merge branch 'master' of https://github.com/amal11002/transit-master
+
+[33mcommit d09d16146b2bf2ee983efbee215be6ca7b51f176[m
+Author: campuskader <campuskader321@gmailcom>
+Date:   Wed Jun 5 16:10:03 2024 +0000
+
+    recommit des elemnts du front
+
+[33mcommit 5a57743502981c52705763a7c13e1ae2ebfe699f[m
+Author: campuskader <campuskader321@gmailcom>
+Date:   Wed Jun 5 15:55:06 2024 +0000
+
+    generation de Departement.php
+
+[33mcommit 75628ec48fd0bc2866b589d247e4a93cbbb05145[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Wed Jun 5 17:19:31 2024 +0300
+
+    nouveau
+
+[33mcommit c0099d7c14a22bb0c46f175ed63eb158e29df054[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Wed Jun 5 17:12:51 2024 +0300
+
+    amelioration role update
+
+[33mcommit 179a54088af3e362f1347e47fe5ad745b144e0ec[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Wed Jun 5 17:02:46 2024 +0300
+
+    Fixing a login and role update problem
+
+[33mcommit 17232e2f8259902c161215a8543b415751f02b9d[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Wed Jun 5 16:44:50 2024 +0300
+
+    Committing local changes before pulling
+
+[33mcommit ae1993001ca40f6ba681031eb452d25d422615f6[m
+Author: campuskader <141946577+campuskader@users.noreply.github.com>
+Date:   Wed Jun 5 10:14:30 2024 +0000
+
+    Delete frontend/src/components directory
+
+[33mcommit 36842cc7dd3bb459606c41fc937a5cba4c610f8e[m
+Author: campuskader <campuskader321@gmailcom>
+Date:   Tue Jun 4 12:33:37 2024 +0000
+
+    Ajout du dossier mon_dossier et son contenu
+
+[33mcommit 22e6247f7554363ea53935767337d4abac9f04ac[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Mon Jun 3 17:58:03 2024 +0300
+
+    Ajout des fichiers du front-end dans le dossier frontend
+
+[33mcommit d19426814321a148a546cb35c5eed8d65bf90ed8[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Mon Jun 3 17:15:10 2024 +0300
+
+    Suppression du dossier transit-master-webapp du suivi de Git
+
+[33mcommit 6c5b11832f1e169a56b989018d81b756ffcbb8fb[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Mon Jun 3 17:02:40 2024 +0300
+
+    Suppression du dossier transit-master-webapp du suivi de Git
+
+[33mcommit a89dc5dbe60c92e440e16201104affd3c4acd9ca[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Mon Jun 3 16:46:57 2024 +0300
+
+    Ajout du frontend
+
+[33mcommit 76bcda013073e539449ff0dee9cb3c3feb2f65b4[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Mon Jun 3 16:33:23 2024 +0300
+
+    Suppression du sous-module transit-master-webapp
+
+[33mcommit 8ad811cc82b197651a9c2b2699f560406dc2daa5[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Mon Jun 3 16:07:30 2024 +0300
+
+    Ajout du front-end
+
+[33mcommit 1977e4c585ecb8c575043c0ca1e2f20654e8743d[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Mon Jun 3 15:16:51 2024 +0300
+
+    b
+
+[33mcommit b736bc5e82034cb392d36d7b042420a464cfa979[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Mon Jun 3 14:34:42 2024 +0300
+
+    Ajout du dossier transit-master-webapp au dépôt et autres modifications
+
+[33mcommit ba2ffe1788f2e7142493a21cef23057c21be7593[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Mon Jun 3 14:24:02 2024 +0300
+
+    Ajout du dossier transit-master-webapp au dépôt
+
+[33mcommit e1f94d9295a4402f7c3bd3c1c8f2030be040dda1[m
+Merge: d954d776 fafc4790
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Mon Jun 3 13:47:26 2024 +0300
+
+    Mon message
+
+[33mcommit fafc47900a082d5afa0fef8ebee57f1bf61510ea[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Mon Jun 3 09:47:52 2024 +0300
+
+    adding react front end for fullstack app transit m
+
+[33mcommit d954d7762346f937f7286c4198cf680c1173bee1[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Mon Jun 3 09:40:59 2024 +0300
+
+    add  transit master front end react app
+
+[33mcommit 2281abf5a63be8aabe0ea60addf54d5644b2d000[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Tue May 28 11:18:59 2024 +0300
+
+    Initialize project using Create React App
+
+[33mcommit 91a0a9dd0be4744b2a9294409a61104faed3a750[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Mon May 27 17:55:16 2024 +0300
+
+    add new files and modif on laravel transit master
+
+[33mcommit 5bce4ab8b2ce6e29e3bf80cafcc7f8464270ed98[m
+Merge: 2cf51215 5ba8a403
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Mon May 27 14:51:31 2024 +0300
+
+    Merge branch 'master' of https://github.com/amal11002/transit-master
+
+[33mcommit 2cf51215bee4c4ddb4d0366dd64fea532c8bf658[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Mon May 27 14:11:02 2024 +0300
+
+    new changes to departement1
+
+[33mcommit 5ba8a4032a84a9cf01d1818cd581829cce4d37f7[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Mon May 27 14:10:17 2024 +0300
+
+    my first commit
+
+[33mcommit 603e2fa222b26bfa30a1853fceab01bbb16741ca[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Mon May 27 12:25:33 2024 +0300
+
+    new changes
+
+[33mcommit 0491e3bb8fece96a221a947c87af4cd6bedf042b[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Sun May 26 23:00:48 2024 +0300
+
+    "add departments pages and "
+
+[33mcommit e3b8a46fc95604711ac4276932d2148228b0685a[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Fri May 24 17:07:48 2024 +0300
+
+    Initial commit of all files
+
+[33mcommit de3951b1b3cabe3a8d18ed3cad8159abc104ab76[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Fri May 24 10:21:35 2024 +0300
+
+    Committing untracked files before merge
+
+[33mcommit 473858d220f763d874f2271decfd365f83e60a3b[m
+Author: amal11002 <amalouedraogo1@gmail.com>
+Date:   Fri May 24 10:15:28 2024 +0300
+
+    Add transit-master directory

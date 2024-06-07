@@ -60,38 +60,7 @@ const Departement2 = () => {
       return;
     }
 
-    const userRole = user.data.role || [];
-    let allowed = false;
-
-    switch (path) {
-      case '/chef2':
-        allowed = userRole.includes('Chef departement');
-        break;
-      case '/assistant2':
-        allowed = userRole.includes('Assistant departement') || userRole.includes('Chef departement');
-        break;
-      case '/declarant':
-        allowed = userRole.includes('Declarant') || userRole.includes('Chef departement');
-        break;
-      case '/livreur':
-        allowed = userRole.includes('Livreur') || userRole.includes('Chef departement');
-        break;
-      case '/poursuivant':
-        allowed = userRole.includes('Poursuivant') || userRole.includes('Chef departement');
-        break;
-      default:
-        allowed = false;
-    }
-
-    if (allowed) {
-      navigate(path);
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Accès refusé',
-        text: 'Vous n\'êtes pas autorisé à accéder à cette page.',
-      });
-    }
+    navigate(path);
   };
 
   const userRole = user.data?.role || [];
@@ -203,7 +172,7 @@ const Departement2 = () => {
         </div>
         <div className="custom-content">
           <div className="custom-row">
-            {userRole.includes('Chef departement') && (
+            {/* {userRole.includes('Chef departement') && (
               <div className="custom-col">
                 <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-dusk" onClick={() => navigateTo('/chef2')}>
                   <div className="custom-block-content custom-block-content-full custom-text-center" onMouseEnter={(e) => e.currentTarget.style.color = '#fff'} onMouseLeave={(e) => e.currentTarget.style.color = '#000'}>
@@ -287,7 +256,7 @@ const Departement2 = () => {
                   </div>
                 </a>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </main>
