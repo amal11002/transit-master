@@ -51,6 +51,7 @@ Route::get('/get-token', [ApiController::class, 'getToken']);
 Route::post('/dossiers', [DossierController::class, 'store']);
 Route::post('/fichiers', [FichierController::class, 'store']);
 Route::get('/dossiers', [DossierController::class, 'index']);
+Route::get('/dossier', [DossierController::class, 'indexe']);
 Route::get('/dossiers/{id}', [DossierController::class, 'show']);
 Route::put('/dossiers/{id}', [DossierController::class, 'update']);
 Route::delete('/dossiers/{id}', [DossierController::class, 'destroy']);

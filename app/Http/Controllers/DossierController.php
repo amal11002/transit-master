@@ -43,7 +43,6 @@ class DossierController extends Controller
             'poids_total_net' => $validatedData['poids_total_net'],
             'volume_total' => $validatedData['volume_total'],
             'date_estimative_darrivee' => $validatedData['date_estimative_darrivee'],
-            'date_transmission_operation' => $validatedData['date_transmission_operation'],
             'date_reele_darrivee' => $validatedData['date_reele_darrivee'],
             'description' => $validatedData['description'],
             'cree_par' => $validatedData['cree_par'],
@@ -148,8 +147,14 @@ class DossierController extends Controller
       $isDateEnvoieOperationSet = !is_null($dossier->date_transmission_operation);
 
       return response()->json(['isDateEnvoieOperationSet' => $isDateEnvoieOperationSet]);
+    
   }
 
+  public function indexe()
+  {
+      $dossiers = Dossier::whereNotNull('date_transmission_operation')->get();
+      return response()->json($dossiers, 200);
+  }
 
 
 
