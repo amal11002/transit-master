@@ -407,16 +407,17 @@ const DossierComponent = () => {
                                 <div className="form-actions">
                                     <button type="button" onClick={previousPage}>Précédent</button>
                                     <button type="button" onClick={() => setViewModalVisible(false)}>Fermer</button>
-                                    <button 
-                                        type="button" 
-                                        className="send-operation" 
-                                        onClick={() => sendOperation(selectedDossier.id_dossier)}
-                                        disabled={!!selectedDossier.date_envoie_operation} // Disable if date_envoie_operation is filled
-                                    >
-                                        Envoyer Opération
-                                    </button>
-                                </div>
-                            </>
+                                    {user.data?.role.includes('Chef departement') && !selectedDossier.date_envoie_operation && (
+                <button 
+                    type="button" 
+                    className="send-operation" 
+                    onClick={() => sendOperation(selectedDossier.id_dossier)}
+                >
+                    Envoyer Opération
+                </button>
+            )}
+        </div>
+    </>
                         )}
                     </div>
                 </div>

@@ -43,7 +43,7 @@ class DossierController extends Controller
             'poids_total_net' => $validatedData['poids_total_net'],
             'volume_total' => $validatedData['volume_total'],
             'date_estimative_darrivee' => $validatedData['date_estimative_darrivee'],
-            'date_transmission_operation' => $validatedData['date_transmission_operation'],
+            
             'date_reele_darrivee' => $validatedData['date_reele_darrivee'],
             'description' => $validatedData['description'],
             'cree_par' => $validatedData['cree_par'],
