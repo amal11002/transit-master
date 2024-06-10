@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use App\Models\Dossier;
 class DossierController extends Controller
 {
+
+    
     // Méthode pour créer un nouveau dossier
     public function store(Request $request)
     {
@@ -114,4 +116,42 @@ class DossierController extends Controller
             return response()->json(['message' => 'Dossier non trouvé'], 404);
         }
     }
+
+
+
+  // Fonction pour mettre à jour le champ date_transmission_operation d'un dossier spécifique
+  public function updateDateTransmission(Request $request, $id)
+  {
+      // Recherche du dossier par ID
+      $dossier = Dossier::find($id);
+
+      // Vérification si le dossier existe
+      if ($dossier) {
+          // Mise à jour du champ date_transmission_operation avec la date actuelle
+          $dossier->update(['date_transmission_operation' => now()]);
+          // Retour d'une réponse JSON avec un message de succès
+          return response()->json(['message' => 'Champ date_transmission_operation mis à jour avec succès'], 200);
+      } else {
+          // Retour d'une réponse JSON avec un message d'erreur si le dossier n'est pas trouvé
+          return response()->json(['message' => 'Dossier non trouvé'], 404);
+      }
+  }
+
+  public function checkDateEnvoieOperation($id)
+  {
+      $dossier = Dossier::find($id);
+
+      if (!$dossier) {
+          return response()->json(['message' => 'Dossier not found'], 404);
+      }
+
+      $isDateEnvoieOperationSet = !is_null($dossier->date_transmission_operation);
+
+      return response()->json(['isDateEnvoieOperationSet' => $isDateEnvoieOperationSet]);
+  }
+
+
+
+
+
 }

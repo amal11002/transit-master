@@ -27,6 +27,7 @@ const DossierComponent = () => {
         description: '',
         date_estimative_darrivee: '',
         date_reele_darrivee: '',
+        date_envoie_operation: ''
     });
     const [selectedDossier, setSelectedDossier] = useState({});
 
@@ -44,6 +45,12 @@ const DossierComponent = () => {
         const response = await fetch('http://localhost:8000/api/dossiers');
         const data = await response.json();
         setDossiers(data);
+    };
+
+    const checkDateEnvoieOperation = async (id) => {
+        const response = await fetch(`http://localhost:8000/api/dossiers/${id}/check-date-envoie-operation`);
+        const data = await response.json();
+        return data.hasDateEnvoieOperation;
     };
 
     const showEditModal = (dossier) => {
@@ -71,7 +78,6 @@ const DossierComponent = () => {
     };
 
     const deleteDossier = async (id) => {
-        // Afficher la SweetAlert pour confirmer la suppression
         Swal.fire({
             title: 'Êtes-vous sûr?',
             text: 'Vous ne pourrez pas récupérer ce dossier!',
@@ -83,7 +89,6 @@ const DossierComponent = () => {
             cancelButtonText: 'Annuler'
         }).then(async (result) => {
             if (result.isConfirmed) {
-                // Si l'utilisateur a confirmé la suppression
                 const response = await fetch(`http://localhost:8000/api/dossiers/${id}`, {
                     method: 'DELETE',
                 });
@@ -100,7 +105,6 @@ const DossierComponent = () => {
             }
         });
     };
-    
 
     const viewDossier = async (id) => {
         const response = await fetch(`http://localhost:8000/api/dossiers/${id}`);
@@ -116,6 +120,31 @@ const DossierComponent = () => {
 
     const previousPage = () => {
         setCurrentPage(currentPage - 1);
+    };
+
+    const sendOperation = async (id) => {
+        const response = await fetch(`http://localhost:8000/api/dossiers/${id}/update-date-transmission`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (response.ok) {
+            fetchDossiers();
+            setViewModalVisible(false);
+            Swal.fire(
+                'Envoyé!',
+                'La date de transmission a été mise à jour avec succès.',
+                'success'
+            );
+        } else {
+            Swal.fire(
+                'Erreur!',
+                'Échec de la mise à jour de la date de transmission.',
+                'error'
+            );
+            console.error('Failed to update transmission date');
+        }
     };
 
     return (
@@ -147,24 +176,36 @@ const DossierComponent = () => {
                                 <button className='view' onClick={() => viewDossier(dossier.id_dossier)}>
                                     <FaEye />
                                 </button>
-                                <button className='edit' onClick={() => showEditModal(dossier)}>
-                                    <FaEdit />
-                                </button>
-                                <button className='delete' onClick={() => deleteDossier(dossier.id_dossier)}>
-                                    <FaTrashAlt />
-                                </button>
+                                {checkDateEnvoieOperation(dossier.id_dossier) ? (
+                                    <>
+                                        <button className='edit' onClick={() => showEditModal(dossier)}>
+                                            <FaEdit />
+                                        </button>
+                                        <button className='delete' onClick={() => deleteDossier(dossier.id_dossier)}>
+                                            <FaTrashAlt />
+                                        </button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <button className='edit' disabled>
+                                            <FaEdit />
+                                        </button>
+                                        <button className='delete' disabled>
+                                            <FaTrashAlt />
+                                        </button>
+                                    </>
+                                )}
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-
             {modalVisible && (
                 <div className="modal">
                     <div className="modal-content">
-                    <button className="close-modal" onClick={() => setModalVisible(false)}>
-                <i className="fa fa-times"></i>
-            </button>
+                        <button className="close-modal" onClick={() => setModalVisible(false)}>
+                            <i className="fa fa-times"></i>
+                        </button>
                         <h2>Modifier Dossier</h2>
                         <form onSubmit={submitForm}>
                             {currentPage === 1 && (
@@ -307,7 +348,6 @@ const DossierComponent = () => {
                                     </div>
                                 </>
                             )}
-                            {/* <button type="button" onClick={() => setModalVisible(false)}>Annuler</button> */}
                         </form>
                     </div>
                 </div>
@@ -316,9 +356,9 @@ const DossierComponent = () => {
             {viewModalVisible && (
                 <div className="modal">
                     <div className="modal-content">
-                    <button className="close-modal" onClick={() => setViewModalVisible(false)}>
-                <i className="fa fa-times"></i>
-            </button>
+                        <button className="close-modal" onClick={() => setViewModalVisible(false)}>
+                            <i className="fa fa-times"></i>
+                        </button>
                         <h2>Détails du Dossier</h2>
                         {currentPage === 1 && (
                             <>
@@ -347,6 +387,14 @@ const DossierComponent = () => {
                                 <div className="form-actions">
                                     <button type="button" onClick={previousPage}>Précédent</button>
                                     <button type="button" onClick={() => setViewModalVisible(false)}>Fermer</button>
+                                    <button 
+                                        type="button" 
+                                        className="send-operation" 
+                                        onClick={() => sendOperation(selectedDossier.id_dossier)}
+                                        disabled={!!selectedDossier.date_envoie_operation} // Disable if date_envoie_operation is filled
+                                    >
+                                        Envoyer Opération
+                                    </button>
                                 </div>
                             </>
                         )}

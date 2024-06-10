@@ -54,4 +54,7 @@ Route::get('/dossiers', [DossierController::class, 'index']);
 Route::get('/dossiers/{id}', [DossierController::class, 'show']);
 Route::put('/dossiers/{id}', [DossierController::class, 'update']);
 Route::delete('/dossiers/{id}', [DossierController::class, 'destroy']);
+Route::put('/dossiers/{id}/update-date-transmission', [DossierController::class, 'updateDateTransmission']);
+Route::get('dossiers/{id}/check-date-envoie-operation', [DossierController::class, 'checkDateEnvoieOperation']);
+
 
