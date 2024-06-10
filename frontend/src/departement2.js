@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
-import './departement2.css';
+import './styled.css';
+import DossierOperation from './DossierOperation'
 import ProfileDropdown from './ProfileDropdown';
 
 const Departement2 = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [user, setUser] = useState({});
-  const [dossiers, setDossiers] = useState([]); // Ajout du state pour les dossiers
-  const [selectedDossier, setSelectedDossier] = useState(null); // State pour le dossier sélectionné
-  const [viewModalOpen, setViewModalOpen] = useState(false); // State pour la modal de vue
-  const [processingModalOpen, setProcessingModalOpen] = useState(false); // State pour la modal de traitement
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,24 +46,6 @@ const Departement2 = () => {
     fetchUserData();
   }, []);
 
-  useEffect(() => {
-    // Fetch des dossiers avec date_envoie_operation renseignée
-    const fetchDossiers = async () => {
-      try {
-        const response = await fetch('http://localhost:8000/api/dossiers/date_envoie_operation');
-        if (!response.ok) {
-          throw new Error('Failed to fetch dossiers');
-        }
-        const data = await response.json();
-        setDossiers(data);
-      } catch (error) {
-        console.error('Error fetching dossiers:', error);
-      }
-    };
-
-    fetchDossiers();
-  }, []);
-
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     document.body.classList.toggle('dark-mode', !darkMode);
@@ -85,72 +64,207 @@ const Departement2 = () => {
     navigate(path);
   };
 
-  const handleViewDossier = (dossier) => {
-    setSelectedDossier(dossier);
-    setViewModalOpen(true);
-  };
-
-  const handleProcessDossier = (dossier) => {
-    setSelectedDossier(dossier);
-    setProcessingModalOpen(true);
-  };
-
   const userRole = user.data?.role || [];
 
   return (
-    <div className={darkMode ? 'departement2 dark-mode' : 'departement2'}>
-      <div className="navbar">
-        <h1>Département 2</h1>
-        <div className="navbar-buttons">
-          <button onClick={() => navigateTo('/dashboard')}>Dashboard</button>
-          <button onClick={() => navigateTo('/profile')}>Profil</button>
-          <ProfileDropdown user={user} />
-          <button onClick={toggleDarkMode}>Mode Sombre</button>
+    <div id="page-container" className="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
+      {/* Sidebar and header code remains the same */}
+      <nav id="sidebar" aria-label="Main Navigation">
+        {/* Sidebar content remains the same */}
+        <div className="js-sidebar-scroll">
+          <div className="content-side">
+            <ul className="nav-main">
+              <li className="nav-main-item">
+                <a className="nav-main-link" href="be_pages_dashboard.html">
+                  <i className="nav-main-link-icon si si-speedometer"></i>
+                  <span className="nav-main-link-name">Dashboard</span>
+                </a>
+              </li>
+              <li className="nav-main-heading">Departement opérations</li>
+              {userRole.includes('Chef departement') && (
+                <li className="nav-main-item">
+                  <a className="nav-main-link" href="#!" onClick={() => navigateTo('/chef2')}>
+                    <i className="nav-main-link-icon si si-energy"></i>
+                    <span className="nav-main-link-name">Chef departement</span>
+                  </a>
+                </li>
+              )}
+              {(userRole.includes('Assistant departement') || userRole.includes('Chef departement')) && (
+                <li className="nav-main-item">
+                  <a className="nav-main-link" href="#!" onClick={() => navigateTo('/assistant2')}>
+                    <i className="nav-main-link-icon si si-energy"></i>
+                    <span className="nav-main-link-name">Assistant département</span>
+                  </a>
+                </li>
+              )}
+              {(userRole.includes('Declarant') || userRole.includes('Chef departement')) && (
+                <li className="nav-main-item">
+                  <a className="nav-main-link" href="#!" onClick={() => navigateTo('/declarant')}>
+                    <i className="nav-main-link-icon si si-energy"></i>
+                    <span className="nav-main-link-name">Déclarant</span>
+                  </a>
+                </li>
+              )}
+              {(userRole.includes('Livreur') || userRole.includes('Chef departement')) && (
+                <li className="nav-main-item">
+                  <a className="nav-main-link" href="#!" onClick={() => navigateTo('/livreur')}>
+                    <i className="nav-main-link-icon si si-energy"></i>
+                    <span className="nav-main-link-name">Livreur</span>
+                  </a>
+                </li>
+              )}
+              {(userRole.includes('Poursuivant') || userRole.includes('Chef departement')) && (
+                <li className="nav-main-item">
+                  <a className="nav-main-link" href="#!" onClick={() => navigateTo('/poursuivant')}>
+                    <i className="nav-main-link-icon si si-energy"></i>
+                    <span className="nav-main-link-name">Poursuivant</span>
+                  </a>
+                </li>
+              )}
+            </ul>
+          </div>
         </div>
-      </div>
-      <div className="content">
-        {/* Liste des dossiers */}
-        <div className="dossier-list">
-          {dossiers.map((dossier) => (
-            <div key={dossier.id} className="dossier-item">
-              <img src="dossier-closed.png" alt="Dossier fermé" className="dossier-image" />
-              <img src="dossier-open.png" alt="Dossier ouvert" className="dossier-image-open" />
-              <div className="dossier-actions">
-                {/* Bouton pour afficher la modal de vue */}
-                <button className="action-button" onClick={() => handleViewDossier(dossier)}>
-                  <img src="read-icon.png" alt="Lire" />
-                </button>
-                {/* Bouton pour afficher la modal de traitement */}
-                <button className="action-button" onClick={() => handleProcessDossier(dossier)}>
-                  <img src="edit-icon.png" alt="Modifier" />
+      </nav>
+
+      <header id="page-header">
+        <div className="content-header">
+          <div className="d-flex align-items-center">
+            <button type="button" className="btn btn-sm btn-alt-secondary me-2 d-lg-none" data-toggle="layout" data-action="sidebar_toggle">
+              <i className="fa fa-fw fa-bars"></i>
+            </button>
+            <button type="button" className="btn btn-sm btn-alt-secondary d-md-none" data-toggle="layout" data-action="header_search_on">
+              <i className="fa fa-fw fa-search"></i>
+            </button>
+          </div>
+          <div className="d-flex align-items-center">
+            <ProfileDropdown user={user} />
+          </div>
+        </div>
+
+        <div id="page-header-search" className="overlay-header bg-body-extra-light">
+          <div className="content-header">
+            <form className="w-100" method="POST">
+              <div className="input-group input-group-sm">
+                <input type="text" className="form-control form-control-alt" placeholder="Search or hit ESC.." id="page-header-search-input" name="page-header-search-input" />
+                <button type="button" className="btn btn-alt-secondary" data-toggle="layout" data-action="header_search_off">
+                  <i className="fa fa-fw fa-times"></i>
                 </button>
               </div>
-            </div>
-          ))}
+            </form>
+          </div>
         </div>
 
-        {/* Modal de vue */}
-        {viewModalOpen && (
-          <div className="modal">
-            <div className="modal-content">
-              <h2>Dossier</h2>
-              <p>Contenu du dossier ici</p>
-              <button onClick={() => setViewModalOpen(false)}>Fermer</button>
+        <div id="page-header-loader" className="overlay-header bg-primary-lighter">
+          <div className="content-header">
+            <div className="w-100 text-center">
+              <i className="fa fa-fw fa-sun fa-spin text-primary"></i>
             </div>
           </div>
-        )}
+        </div>
+      </header>
 
-        {/* Modal de traitement */}
-        {processingModalOpen && (
-          <div className="modal">
-            <div className="modal-content">
-              <h2>Traitement du dossier</h2>
-              <p>Formulaire de traitement ici</p>
-              <button onClick={() => setProcessingModalOpen(false)}>Fermer</button>
-            </div>
+      <main id="main-container">
+        <div className="bg-primary-dark">
+          <div className="content content-full text-center pt-7 pb-5">
+            <h1 className="h2 text-white mb-2">
+              Bienvenue dans la page du departement des opérations
+            </h1>
           </div>
-        )}
-      </div>
+        </div>
+        <div className="custom-content">
+          <div className="custom-row">
+            {/* {userRole.includes('Chef departement') && (
+              <div className="custom-col">
+                <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-dusk" onClick={() => navigateTo('/chef2')}>
+                  <div className="custom-block-content custom-block-content-full custom-text-center" onMouseEnter={(e) => e.currentTarget.style.color = '#fff'} onMouseLeave={(e) => e.currentTarget.style.color = '#000'}>
+                    <div className="custom-item custom-item-circle custom-bg-black-25">
+                      <i className="fa fa-users custom-text-white"></i>
+                    </div>
+                    <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
+                      Chef département
+                    </p>
+                    <p className="custom-text-white-75">
+                      Cliquez pour gérer les chefs de département
+                    </p>
+                  </div>
+                </a>
+              </div>
+            )}
+            {(userRole.includes('Assistant departement') || userRole.includes('Chef departement')) && (
+              <div className="custom-col">
+                <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-dusk" onClick={() => navigateTo('/assistant2')}>
+                  <div className="custom-block-content custom-block-content-full custom-text-center" onMouseEnter={(e) => e.currentTarget.style.color = '#fff'} onMouseLeave={(e) => e.currentTarget.style.color = '#000'}>
+                    <div className="custom-item custom-item-circle custom-bg-black-25">
+                      <i className="fa fa-users custom-text-white"></i>
+                    </div>
+                    <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
+                      Assistant département
+                    </p>
+                    <p className="custom-text-white-75">
+                      Cliquez pour gérer les assistants de département
+                    </p>
+                  </div>
+                </a>
+              </div>
+            )}
+            {(userRole.includes('Declarant') || userRole.includes('Chef departement')) && (
+              <div className="custom-col">
+                <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-dusk" onClick={() => navigateTo('/declarant')}>
+                  <div className="custom-block-content custom-block-content-full custom-text-center" onMouseEnter={(e) => e.currentTarget.style.color = '#fff'} onMouseLeave={(e) => e.currentTarget.style.color = '#000'}>
+                    <div className="custom-item custom-item-circle custom-bg-black-25">
+                      <i className="fa fa-users custom-text-white"></i>
+                    </div>
+                    <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
+                      Déclarant
+                    </p>
+                    <p className="custom-text-white-75">
+                      Cliquez pour gérer les déclarants
+                    </p>
+                  </div>
+                </a>
+              </div>
+            )}
+            {(userRole.includes('Livreur') || userRole.includes('Chef departement')) && (
+              <div className="custom-col">
+                <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-dusk" onClick={() => navigateTo('/livreur')}>
+                  <div className="custom-block-content custom-block-content-full custom-text-center" onMouseEnter={(e) => e.currentTarget.style.color = '#fff'} onMouseLeave={(e) => e.currentTarget.style.color = '#000'}>
+                    <div className="custom-item custom-item-circle custom-bg-black-25">
+                      <i className="fa fa-users custom-text-white"></i>
+                    </div>
+                    <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
+                      Livreur
+                    </p>
+                    <p className="custom-text-white-75">
+                      Cliquez pour gérer les livreurs
+                    </p>
+                  </div>
+                </a>
+              </div>
+            )}
+            {(userRole.includes('Poursuivant') || userRole.includes('Chef departement')) && (
+              <div className="custom-col">
+                <a className="custom-block custom-block-rounded custom-block-link-pop custom-bg-dusk" onClick={() => navigateTo('/poursuivant')}>
+                  <div className="custom-block-content custom-block-content-full custom-text-center" onMouseEnter={(e) => e.currentTarget.style.color = '#fff'} onMouseLeave={(e) => e.currentTarget.style.color = '#000'}>
+                    <div className="custom-item custom-item-circle custom-bg-black-25">
+                      <i className="fa fa-users custom-text-white"></i>
+                    </div>
+                    <p className="custom-text-white custom-fs-lg custom-mt-3 custom-mb-0">
+                      Poursuivant
+                    </p>
+                    <p className="custom-text-white-75">
+                      Cliquez pour gérer les poursuivants
+                    </p>
+                  </div>
+                </a>
+              </div>
+            )} */}
+          </div>
+         <div>
+      <DossierOperation/>
+      </div> 
+    
+        </div>
+      </main>
     </div>
   );
 };

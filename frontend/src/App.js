@@ -17,6 +17,7 @@ import Files from './components/Files'; // Assurez-vous que le chemin est correc
 import Dossier from './components/pages/Dossier'; // Import correct pour le composant Dossier
 import Commercial from './commercial.js';  // Corrected path
 import Assistant1 from './assistant1.js';  // Corrected path
+import DossierOperation from './DossierOperation.js';
 
 
 import './App.css';  // Assuming the styles are in App.css
@@ -30,8 +31,7 @@ const App = () => {
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/departement1" element={<Departement1 />} />
-         
+          <Route path="/departement1" element={<Departement1 />} />       
         <Route path="/Dossier" element={<Dossier />} />
         <Route path="/fichier" element={<MyFile />} />
         <Route path="/lesdossier" element={<ListDossier />} />
@@ -40,6 +40,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/commercial" element={<Commercial />} />
           <Route path="/assistant1" element={<Assistant1 />} />
+          <Route path="/operations" element={<DossierOperation />} />
           {/* <Route path="/register" element={<ProtectedRoute component={Register} />} />
           
           {/* You can add other routes here */}
