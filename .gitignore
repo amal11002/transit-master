@@ -43,3 +43,4 @@ yarn-error.log
 /.idea
 /.vscode
 >>>>>>> fafc47900a082d5afa0fef8ebee57f1bf61510ea
+.env

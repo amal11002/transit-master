@@ -27,19 +27,15 @@ const DossierComponent = () => {
         description: '',
         date_estimative_darrivee: '',
         date_reele_darrivee: '',
-        date_envoie_operation: ''
     });
     const [selectedDossier, setSelectedDossier] = useState({});
-
+    const [user, setUser] = useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
         fetchDossiers();
+        fetchUserData();
     }, []);
-
-    const handleCreateClick = () => {
-        navigate('/dossier');
-    };
 
     const fetchDossiers = async () => {
         const response = await fetch('http://localhost:8000/api/dossiers');
@@ -47,10 +43,39 @@ const DossierComponent = () => {
         setDossiers(data);
     };
 
-    const checkDateEnvoieOperation = async (id) => {
-        const response = await fetch(`http://localhost:8000/api/dossiers/${id}/check-date-envoie-operation`);
-        const data = await response.json();
-        return data.hasDateEnvoieOperation;
+    const fetchUserData = async () => {
+        const token = sessionStorage.getItem('token');
+        if (!token) {
+            console.error('Token is missing');
+            return;
+        }
+
+        const userId = sessionStorage.getItem('userId');
+        if (!userId) {
+            console.error('User ID is missing');
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://localhost:8000/api/users/${userId}`, {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch user data');
+            }
+
+            const user = await response.json();
+            setUser(user);
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        }
+    };
+
+    const handleCreateClick = () => {
+        navigate('/dossier');
     };
 
     const showEditModal = (dossier) => {
@@ -173,28 +198,23 @@ const DossierComponent = () => {
                             <td>{dossier.exportateur}</td>
                             <td>{dossier.date_ouverture}</td>
                             <td>
-                                <button className='view' onClick={() => viewDossier(dossier.id_dossier)}>
+                            <button className='view' onClick={() => viewDossier(dossier.id_dossier)}>
                                     <FaEye />
                                 </button>
-                                {checkDateEnvoieOperation(dossier.id_dossier) ? (
+                                {console.log("User ID:", user.data?.id, "Dossier créé par:", dossier.cree_par)}
+                                {(user.data?.role.includes('Chef departement') || dossier.cree_par === user.data?.id.toString()) && (
                                     <>
                                         <button className='edit' onClick={() => showEditModal(dossier)}>
                                             <FaEdit />
                                         </button>
-                                        <button className='delete' onClick={() => deleteDossier(dossier.id_dossier)}>
-                                            <FaTrashAlt />
-                                        </button>
-                                    </>
-                                ) : (
-                                    <>
-                                        <button className='edit' disabled>
-                                            <FaEdit />
-                                        </button>
-                                        <button className='delete' disabled>
-                                            <FaTrashAlt />
-                                        </button>
+                                        {user.data?.role.includes('Chef departement') && (
+                                            <button className='delete' onClick={() => deleteDossier(dossier.id_dossier)}>
+                                                <FaTrashAlt />
+                                            </button>
+                                        )}
                                     </>
                                 )}
+
                             </td>
                         </tr>
                     ))}
@@ -387,16 +407,17 @@ const DossierComponent = () => {
                                 <div className="form-actions">
                                     <button type="button" onClick={previousPage}>Précédent</button>
                                     <button type="button" onClick={() => setViewModalVisible(false)}>Fermer</button>
-                                    <button 
-                                        type="button" 
-                                        className="send-operation" 
-                                        onClick={() => sendOperation(selectedDossier.id_dossier)}
-                                        disabled={!!selectedDossier.date_envoie_operation} // Disable if date_envoie_operation is filled
-                                    >
-                                        Envoyer Opération
-                                    </button>
-                                </div>
-                            </>
+                                    {user.data?.role.includes('Chef departement') && !selectedDossier.date_envoie_operation && (
+                <button 
+                    type="button" 
+                    className="send-operation" 
+                    onClick={() => sendOperation(selectedDossier.id_dossier)}
+                >
+                    Envoyer Opération
+                </button>
+            )}
+        </div>
+    </>
                         )}
                     </div>
                 </div>
