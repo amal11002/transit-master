@@ -57,5 +57,7 @@ Route::put('/dossiers/{id}', [DossierController::class, 'update']);
 Route::delete('/dossiers/{id}', [DossierController::class, 'destroy']);
 Route::put('/dossiers/{id}/update-date-transmission', [DossierController::class, 'updateDateTransmission']);
 Route::get('dossiers/{id}/check-date-envoie-operation', [DossierController::class, 'checkDateEnvoieOperation']);
+Route::patch('/dossiers/{id}/accuser', [DossierController::class, 'accuser']);
+Route::patch('/dossiers/{id}/regime_douanier', [DossierController::class, 'regime_douanier']);
 
 

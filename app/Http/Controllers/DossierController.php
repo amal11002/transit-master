@@ -156,7 +156,42 @@ class DossierController extends Controller
       return response()->json($dossiers, 200);
   }
 
+  public function accuser($id)
+  {
+      try {
+          // Trouver le dossier par son ID
+          $dossier = Dossier::findOrFail($id);
 
+          // Mettre à jour le champ accuse_reception_traitement
+          $dossier->accuse_reception_traitement = 'valider';
+          $dossier->save();
 
+          return response()->json(['message' => 'Dossier mis à jour avec succès.'], 200);
+      } catch (\Exception $e) {
+          return response()->json(['message' => 'Erreur lors de la mise à jour du dossier.', 'error' => $e->getMessage()], 500);
+      }
+  }
 
+   public function regime_douanier(Request $request, $id)
+    {
+        // Valider la requête
+        $request->validate([
+            'regime_douanier' => 'required|string|max:255',
+        ]);
+
+        // Recherche du dossier par ID
+        $dossier = Dossier::find($id);
+
+        // Vérification si le dossier existe
+        if ($dossier) {
+            // Mise à jour du champ regime_douanier avec la valeur de la requête
+            $dossier->update(['regime_douanier' => $request->input('regime_douanier')]);
+
+            // Retour d'une réponse JSON avec un message de succès
+            return response()->json(['message' => 'Champ regime_douanier mis à jour avec succès'], 200);
+        } else {
+            // Retour d'une réponse JSON avec un message d'erreur si le dossier n'est pas trouvé
+            return response()->json(['message' => 'Dossier non trouvé'], 404);
+        }
+    }
 }
